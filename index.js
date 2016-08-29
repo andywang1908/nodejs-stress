@@ -7,6 +7,7 @@ var request = Promise.promisifyAll(require("request").defaults({ jar: true }), {
 //var singleDraw = Promise.promisifyAll(require('./singleDraw.js'), {multiArgs: true})
 var singleDraw = require('./singleDraw.js')
 
+/*
 var oracledb = require('oracledb');
 
 oracledb.getConnection(
@@ -27,7 +28,7 @@ oracledb.getConnection(
       });
   });
 
-return
+return*/
 
 var fileNames = new Array(5)
 

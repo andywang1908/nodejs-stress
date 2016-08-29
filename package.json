@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/andywang1908/nodejs-stress/issues"
   },
-  "homepage": "https://github.com/andywang1908/nodejs-stress#readme"
+  "homepage": "https://github.com/andywang1908/nodejs-stress#readme",
+  "dependencies": {
+    "bluebird": "^3.4.3",
+    "cheerio": "^0.22.0",
+    "fs": "0.0.1-security",
+    "winston": "^2.2.0"
+  }
 }

@@ -1,11 +1,5 @@
 require('events').EventEmitter.prototype._maxListeners = 100
-
-var Promise = require("bluebird");
-
-var request = Promise.promisifyAll(require("request").defaults({ jar: true }), {multiArgs: true})
-
-//var singleDraw = Promise.promisifyAll(require('./singleDraw.js'), {multiArgs: true})
-var singleDraw = require('./singleDraw.js')
+var util = require('./util.js')
 
 /*
 var oracledb = require('oracledb');
@@ -30,13 +24,24 @@ oracledb.getConnection(
 
 return*/
 
-var fileNames = new Array(5)
+var mapTask = require('./task/toysrus/mapTask.js')
+var tasks = [] //new Array(1)
+mapTask.mapTask(tasks)
+.then(function() {
+  util.logConsole('info', 'tasks are created!')
+  //util.logConsole('debug', tasks)
 
-Promise.map(fileNames, function(fileName) {
-  // Promise.map awaits for returned promises as well.
-  console.log(fileName)
-  // return crab(ttc)
-  return singleDraw.singleDraw()
-}, {concurrency: 3}).then(function() {
+
+//return
+var Promise = require("bluebird");
+var singleDraw = require('./task/toysrus/singleDraw.js')
+
+Promise.map(tasks, function(task) {
+  // console.log(task)
+  return singleDraw.singleDraw(task)
+}, {concurrency: 1}).then(function() {
   console.log("All done!!!")
 })
+
+})
+

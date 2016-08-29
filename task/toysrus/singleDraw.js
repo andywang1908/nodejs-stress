@@ -13,9 +13,16 @@ var calFullUrl = function(part) {
 }*/
 
 var cheerio = require('cheerio')
-var singleDraw = function(task) {
+var singleDraw = function(task, summary) {
+
+//console.log(summary)
 
 task = constant.urlBase + task
+
+if ( summary[task] ) {
+  return
+}
+var deals = []
 
 return util.crab(task)
 .spread(function (response, body) {
@@ -37,13 +44,29 @@ return util.crab(task)
   $('.price dd.list').each(function(i, elem) {
     var priceHight = $(this).text().trim().substring(1)
     var priceLow = $(this).parent().find('dd.ours').text().trim().substring(1)
-    var ratio = priceLow/priceHight
-    var parentGood = $(this).parent().parent().parent().parent().parent() // a.thumbnail
+    var ratio = (priceLow/priceHight+'').substring(0,4)
+    var parentGood = $(this).parent().parent().parent().parent().parent() // 
+    var iconGood = parentGood.find('img.thumbnail')
     var aGood = parentGood.find('a.title')
-    if ( ratio<=0.6 ) {
+    if ( ratio<=0.8 ) {
       console.log( priceHight+':cheap to:'+priceLow+":"+ratio+"\n"+aGood.text().trim()+"\n"+aGood.attr('href')+"\n" )
+      //summary.push( '<li>'+priceHight+':cheap to:'+priceLow+":"+ratio+":"+'<a href="'+constant.urlBase+aGood.attr('href')+'" target="_blank">'+aGood.text().trim()+'</a><img src="'+constant.urlBase+iconGood.attr('src')+'"/></li>\n' )
+      //util.logFile("log/summary.html", summary)
+
+      var deal = {
+        'p1':priceHight
+        ,'p2':priceLow
+        ,'ratio':ratio
+        ,'desc':aGood.text().trim()
+        ,'href':constant.urlBase+aGood.attr('href')
+        ,'icon':constant.urlBase+iconGood.attr('src')
+      }
+      deals.push(deal)
     }
   })
+
+  summary[task] = deals
+  util.logFile('./task/toysrus/kpi.json', JSON.stringify(summary) );//, 'utf-8'
 })
 /*
 .then(function() {

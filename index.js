@@ -24,24 +24,24 @@ oracledb.getConnection(
 
 return*/
 
-var mapTask = require('./task/toysrus/mapTask.js')
+var taskFolder = './task/toysrus/'
+
+var mapTask = require(taskFolder+'mapTask.js')
 var tasks = [] //new Array(1)
 mapTask.mapTask(tasks)
 .then(function() {
   util.logConsole('info', 'tasks are created!')
   //util.logConsole('debug', tasks)
 
+  //return
+  var Promise = require("bluebird");
+  var singleDraw = require(taskFolder+'singleDraw.js')
 
-//return
-var Promise = require("bluebird");
-var singleDraw = require('./task/toysrus/singleDraw.js')
-
-Promise.map(tasks, function(task) {
-  // console.log(task)
-  return singleDraw.singleDraw(task)
-}, {concurrency: 1}).then(function() {
-  console.log("All done!!!")
-})
-
+  Promise.map(tasks, function(task) {
+    // console.log(task)
+    return singleDraw.singleDraw(task)
+  }, {concurrency: 5}).then(function() {
+    console.log("All done!!!")
+  })
 })
 

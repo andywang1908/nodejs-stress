@@ -1,6 +1,6 @@
 require('events').EventEmitter.prototype._maxListeners = 100
 
-var Promise = require("bluebird")
+var Promise = require("bluebird");
 
 var request = Promise.promisifyAll(require("request").defaults({ jar: true }), {multiArgs: true})
 

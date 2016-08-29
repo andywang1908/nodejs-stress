@@ -13,11 +13,6 @@ exports.urlApply = urlApply
 var plateNumber = 'BPBP200'
 exports.plateNumber = plateNumber
 
-//hard to get through js
-//182 demo
-var urlPlateNumber = urlBase + "/sodp/portal/s2i/!ut/p/b1/dctLDoIwFEDRtbAA8_oU-QwJAYS2ggJaOiHEEIIKKBg-rl5dgMObnAsSshWiTtStaeg6CJBtMdZV8aq7trj_Wmr5nke7lHpIQjcixGIbA93A3xCfQPYF-j_g8TUkIIiax9epWy_tkSZcDZeD6SdOfrqSOUQ-fo8xYibv90Of0smm2lnc7nOVaY1oHqXofW2I3sbMltjcITqh24knjbcBs28vHFZI3YtjMXkwgkmBuGxz24JGemNlKcoHhSFHDQ!!/"
-exports.urlPlateNumber = urlPlateNumber
-
 //get from console not in page source
 var urlSurvey = urlBase + "/sodp/s2i/S2I_AjaxProxy/S2iProxy/http/intradev.services.ebc.gov.on.ca%3a8080/S2I/services/FormGenerator/s2i/hot_form?hostPath=http://10.160.200.182:10039"
 exports.urlSurvey = urlSurvey

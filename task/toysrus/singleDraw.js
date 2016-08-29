@@ -23,6 +23,7 @@ if ( summary[task] ) {
   return
 }
 var deals = []
+var datetime = new Date()
 
 return util.crab(task)
 .spread(function (response, body) {
@@ -48,7 +49,9 @@ return util.crab(task)
     var parentGood = $(this).parent().parent().parent().parent().parent() // 
     var iconGood = parentGood.find('img.thumbnail')
     var aGood = parentGood.find('a.title')
+    var aBrand = $('#filter-cancel li a').eq(1).text().trim().split(":")
     if ( ratio<=0.8 ) {
+      console.log( ":"+aBrand[aBrand.length-1].trim().toUpperCase()+":"+datetime )
       console.log( priceHight+':cheap to:'+priceLow+":"+ratio+"\n"+aGood.text().trim()+"\n"+aGood.attr('href')+"\n" )
       //summary.push( '<li>'+priceHight+':cheap to:'+priceLow+":"+ratio+":"+'<a href="'+constant.urlBase+aGood.attr('href')+'" target="_blank">'+aGood.text().trim()+'</a><img src="'+constant.urlBase+iconGood.attr('src')+'"/></li>\n' )
       //util.logFile("log/summary.html", summary)
@@ -60,6 +63,8 @@ return util.crab(task)
         ,'desc':aGood.text().trim()
         ,'href':constant.urlBase+aGood.attr('href')
         ,'icon':constant.urlBase+iconGood.attr('src')
+        ,'brand':aBrand[aBrand.length-1].trim().toUpperCase()
+        ,'input':datetime
       }
       deals.push(deal)
     }

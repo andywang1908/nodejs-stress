@@ -28,7 +28,8 @@ var taskFolder = './task/toysrus/'
 
 var mapTask = require(taskFolder+'mapTask.js')
 var tasks = [] //new Array(1)
-var summary = require(taskFolder+'kpi.json') //{}
+var summary = require(taskFolder+'kpi.json')
+//summary = {} //restart
 console.log( Object.keys(summary).length )
 
 //write summary to html

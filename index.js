@@ -24,7 +24,7 @@ oracledb.getConnection(
 
 return*/
 
-var taskFolder = './task/toysrus/'
+var taskFolder = './task/sportchek/'
 
 var mapTask = require(taskFolder+'mapTask.js')
 var tasks = [] //new Array(1)
@@ -41,7 +41,7 @@ for (var key in summary) {
     var dealsLength = deals.length
 
     for (var i = 0; i < dealsLength; i++) {
-      if ( deals[i]['ratio']<=0.5 && key.indexOf('category')>-1 ) {
+      if ( deals[i]['ratio']<=0.7 ) {// && key.indexOf('category')>-1
         html += '<li>'+deals[i]['brand']+':'+deals[i]['p1']+':cheap to:'+deals[i]['p2']+":"+deals[i]['ratio']+":"+'<a href="'+deals[i]['href']+'" target="_blank">'+deals[i]['desc']+'</a><imga src="'+deals[i]['icon']+'"/></li>\n'
         htmlCount++
       }
@@ -57,7 +57,7 @@ var singleDraw = require(taskFolder+'singleDraw.js')
 mapTask.mapTask(tasks)
 .then(function() {
   util.logConsole('info', 'tasks are created!')
-  //tasks = tasks.slice(0, 1);
+  //tasks = tasks.slice(0, 2);
   //util.logConsole('debug', tasks)
 
   //return

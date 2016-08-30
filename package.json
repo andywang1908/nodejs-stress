@@ -20,6 +20,7 @@
     "bluebird": "^3.4.3",
     "cheerio": "^0.22.0",
     "fs": "0.0.1-security",
+    "request": "^2.74.0",
     "winston": "^2.2.0"
   }
 }

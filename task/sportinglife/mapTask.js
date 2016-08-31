@@ -16,13 +16,17 @@ var cheerio = require('cheerio')
 var mapTask = function(tasks) {
 return util.crab(constant.urlApply)
 .spread(function (response, body) {
-  //util.logFile("log/StepApply.html", body)
+  util.logFile("log/StepApply.html", body)
   //return util.crab(constant.urlPlateNumber)
 
   var $ = cheerio.load(body)
-  $('.branddiv a').each(function(i, elem) {
+  $('ul li.col-xs-6 a').each(function(i, elem) {
     //console.log( $(this).attr('href') )
-    tasks.push( $(this).attr('href') )
+    var href = $(this).attr('href')
+    if ( href.indexOf(';jsessionid')>0 ) {
+      href = href.substring(0, href.indexOf(';jsessionid'))
+    }
+    tasks.push( href )//?howMany=480
   })
 
   //util.logConsole( $('.branddiv a').length )

@@ -29,7 +29,7 @@ var taskFolder = './task/toysrus/'
 var mapTask = require(taskFolder+'mapTask.js')
 var tasks = [] //new Array(1)
 var summary = require(taskFolder+'kpi.json')
-//summary = {} //restart
+//var summary = {} //restart
 console.log( Object.keys(summary).length )
 
 //write summary to html
@@ -41,8 +41,8 @@ for (var key in summary) {
     var dealsLength = deals.length
 
     for (var i = 0; i < dealsLength; i++) {
-      if ( deals[i]['ratio']<=0.6 ) {
-        html += '<li>'+deals[i]['p1']+':cheap to:'+deals[i]['p2']+":"+deals[i]['ratio']+":"+'<a href="'+deals[i]['href']+'" target="_blank">'+deals[i]['desc']+'</a><img src="'+deals[i]['icon']+'"/></li>\n'
+      if ( deals[i]['ratio']<=0.5 && key.indexOf('category')>-1 ) {
+        html += '<li>'+deals[i]['brand']+':'+deals[i]['p1']+':cheap to:'+deals[i]['p2']+":"+deals[i]['ratio']+":"+'<a href="'+deals[i]['href']+'" target="_blank">'+deals[i]['desc']+'</a><imga src="'+deals[i]['icon']+'"/></li>\n'
         htmlCount++
       }
     }
@@ -51,23 +51,38 @@ for (var key in summary) {
 util.logFile(taskFolder+'summary.html', '<li>total:'+htmlCount+'</li>'+html );
 //return;
 
+
+var Promise = require("bluebird");
+var singleDraw = require(taskFolder+'singleDraw.js')
 mapTask.mapTask(tasks)
 .then(function() {
   util.logConsole('info', 'tasks are created!')
+  //tasks = tasks.slice(0, 1);
   //util.logConsole('debug', tasks)
-  //tasks = tasks.slice(0, 9);
 
   //return
-  var Promise = require("bluebird");
-  var singleDraw = require(taskFolder+'singleDraw.js')
-
   Promise.map(tasks, function(task) {
     // console.log(task)
-    return singleDraw.singleDraw(task, summary)
+    return singleDraw.singleDraw(task, summary, tasks)
   }, {concurrency: 5}).then(function() {
     //console.log(summary)
-    util.logFile(taskFolder+'kpi.json', JSON.stringify(summary) );
-    console.log("All done!!!")
+    //util.logFile(taskFolder+'kpi.json', JSON.stringify(summary) );
+    console.log("All done but subway!!!")
+
+    util.logConsole('info', 'tasks are fixed!')
+    //tasks = tasks.slice(0, 1);
+    //util.logConsole('debug', tasks)
+
+    //return
+    Promise.map(tasks, function(task) {
+      // console.log(task)
+      return singleDraw.singleDraw(task, summary, tasks)
+    }, {concurrency: 5}).then(function() {
+      //console.log(summary)
+      util.logFile(taskFolder+'kpi.json', JSON.stringify(summary) );
+      console.log("All done!!!")
+    })
   })
 })
+
 

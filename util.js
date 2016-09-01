@@ -31,8 +31,8 @@ var crab = function(urlNew) {
   var options = {
     //url: urlNew
     a:'a'
-    ,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
-    ,timeout: 30000
+    //,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
+    ,timeout: 50000
     ,headers: {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16"
       //,'X-FORWARDED-FOR' : '10.160.200.141'
@@ -48,8 +48,8 @@ var brab = function(urlNew, formParams) {
   var options = {
     //url: urlNew
     a:'a'
-    ,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
-    ,timeout: 30000
+    //,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
+    ,timeout: 50000
     ,headers: {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16"
       //,'X-FORWARDED-FOR' : '10.160.200.141'

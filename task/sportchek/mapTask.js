@@ -30,12 +30,12 @@ return util.crab(constant.urlApply)
       brandName='GO+PRO'
     } else if ( brandName=='SKULLCANDY' ) {
       brandName='SKULL+CANDY'
-    } else if ( brandName=='CCM' ) {
-      brandName='C.C.M.'
+    } else if ( brandName=='SMS+Audio' ) {
+      brandName='SMS'
     } else if ( brandName=='CCM' ) {
       brandName='C.C.M.'
     }
-    var mylist = ['AUCLAIR', 'GORE-TEX', 'VESTAL', 'UMBRO', 'SUNDOG', 'SPECIALIZED', 'SPECIALIZED', 'SPECIALIZED']
+    var mylist = ['AUCLAIR', 'GORE-TEX', 'VESTAL', 'UMBRO', 'SUNDOG', 'SPECIALIZED', 'K2+SKI', 'K2+SNOW', 'NIKE+GOLF']
     if ( mylist.indexOf(brandName)>-1 ) {
     } else {
       var href = 'https://www.sportchek.ca/services/sportchek/search-and-promote/products?x1=brand&q1='+brandName+'&page=1&count=2000'

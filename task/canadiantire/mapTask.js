@@ -29,15 +29,6 @@ return util.crab(constant.urlApply)
     tasks.push( href )
   })
 })
-.then(function() {
-  //fs.readFileAsync('ttc.txt')  
-  util.logConsole('info', 'great success for one thread!')
-})
-.catch(function(e) {
-  util.logConsole('error', 'some exception to break:'+e)
-})
-.error(function(e) {
-  util.logConsole('error', 'some error to break:'+e)
-})
+
 }
 exports.mapTask = mapTask

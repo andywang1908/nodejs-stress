@@ -56,22 +56,25 @@ var Promise = require("bluebird")
 var singleDraw = require(taskFolder+'singleDraw.js')
 mapTask.mapTask(tasks)
 .then(function() {
-  util.logConsole('info', 'tasks are created!')
+  util.logConsole('info', 'tasks are inited!')
   tasks = tasks.slice(0, 2);
   //util.logConsole('debug', tasks)
 
   //return
   return Promise.map(tasks, function(task) {
-    // console.log(task)
+    //console.log(task)
     return singleDraw.singleDraw(task, summary, tasks)
   }, {concurrency: 5}).then(function() {
-    //console.log(summary)
+    console.log(summary)
     util.logFile(taskFolder+'kpi.json', JSON.stringify(summary) );
-    console.log("All done!!!")
   })
 })
 .then(function() {
-  console.log("All done???")
+  return console.log("This must be last!!!!")
 })
-
-
+.catch(function(e) {
+  util.logConsole('error', 'some exception to break:'+e)
+})
+.error(function(e) {
+  util.logConsole('error', 'some error to break:'+e)
+})

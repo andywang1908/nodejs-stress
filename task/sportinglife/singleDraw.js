@@ -49,11 +49,14 @@ var singleDraw = function(task, summary, tasks) {
                 //summary.push( '<li>'+priceHight+':cheap to:'+priceLow+":"+ratio+":"+'<a href="'+constant.urlBase+aGood.attr('href')+'" target="_blank">'+aGood.text().trim()+'</a><img src="'+constant.urlBase+iconGood.attr('src')+'"/></li>\n' )
                 //util.logFile("log/summary.html", summary)
 
+              var singleDesc = aGood.find('h5').text().trim()
               var deal = {
                 'p1': priceHight,
                 'p2': priceLow,
                 'ratio': ratio,
-                'desc': aGood.find('h5').text().trim(),
+                'desc': singleDesc,
+                //'tags': singleDesc,
+                'title': singleDesc.toLowerCase(),
                 'href': constant.urlBase + aGood.attr('href'),
                 'icon': constant.urlBase + iconGood.attr('src'),
                 'brand': aBrand,
@@ -100,11 +103,14 @@ var singleDraw = function(task, summary, tasks) {
                     //summary.push( '<li>'+priceHight+':cheap to:'+priceLow+":"+ratio+":"+'<a href="'+constant.urlBase+aGood.attr('href')+'" target="_blank">'+aGood.text().trim()+'</a><img src="'+constant.urlBase+iconGood.attr('src')+'"/></li>\n' )
                     //util.logFile("log/summary.html", summary)
 
+                  var singleDesc = aGood.find('h5').text().trim()
                   var deal = {
                     'p1': priceHight,
                     'p2': priceLow,
                     'ratio': ratio,
-                    'desc': aGood.find('h5').text().trim(),
+                    'desc': singleDesc,
+                    //'tags': singleDesc,
+                    'title': singleDesc.toLowerCase(),
                     'href': constant.urlBase + aGood.attr('href'),
                     'icon': constant.urlBase + iconGood.attr('src'),
                     'brand': aBrand,

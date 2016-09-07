@@ -46,7 +46,7 @@ return util.crab(task)
     var priceHight = $(this).text().trim().substring(1)
     var priceLow = $(this).parent().find('dd.ours').text().trim().substring(1)
     var ratio = (priceLow/priceHight+'').substring(0,4)
-    var parentGood = $(this).parent().parent().parent().parent().parent() // 
+    var parentGood = $(this).parent().parent().parent().parent().parent() //
     var iconGood = parentGood.find('img.thumbnail')
     var aGood = parentGood.find('a.title')
     var aBrand = $('#filter-cancel li a').eq(1).text().trim().split(":")
@@ -56,11 +56,13 @@ return util.crab(task)
       //summary.push( '<li>'+priceHight+':cheap to:'+priceLow+":"+ratio+":"+'<a href="'+constant.urlBase+aGood.attr('href')+'" target="_blank">'+aGood.text().trim()+'</a><img src="'+constant.urlBase+iconGood.attr('src')+'"/></li>\n' )
       //util.logFile("log/summary.html", summary)
 
+      var singleDesc = aGood.text().trim()
       var deal = {
         'p1':priceHight
         ,'p2':priceLow
         ,'ratio':ratio
-        ,'desc':aGood.text().trim()
+        ,'desc':singleDesc
+        ,'title':singleDesc.toLowerCase()
         ,'href':constant.urlBase+aGood.attr('href')
         ,'icon':constant.urlBase+iconGood.attr('src')
         ,'brand':aBrand[aBrand.length-1].trim().toUpperCase()
@@ -75,7 +77,7 @@ return util.crab(task)
 })
 /*
 .then(function() {
-  //fs.readFileAsync('ttc.txt')  
+  //fs.readFileAsync('ttc.txt')
   util.logConsole('info', 'great success for one thread!')
 })*/
 .catch(function(e) {

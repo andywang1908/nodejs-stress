@@ -76,6 +76,7 @@ var singleDraw = function(task, summary, tasks) {
             'p2': priceLow,
             'ratio': ratio,
             'desc': nameGood,
+            'title': nameGood.toLowerCase(),
             'href': urlGood,
             'icon': iconGood,
             'brand': aBrand,

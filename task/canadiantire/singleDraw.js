@@ -1,7 +1,6 @@
 var util = require('../../util.js')
 var constant = require('./constant.json') //.dan .demo
 
-
 var Promise = require('bluebird')
 var cheerio = require('cheerio')
 var singleDraw = function(task, summary, tasks) {
@@ -38,30 +37,30 @@ var singleDraw = function(task, summary, tasks) {
       return Promise.map(middleTasks, function(task) {
         console.log('-->' + task)
         return util.crab(task)
-          .spread(function (response, body) {
+          .spread(function(response, body) {
 
             var $ = cheerio.load(body)
             $('span.price__total-value  price__total--on-sale').each(function(i, elem) {
               var priceLow = $(this).text().trim().substring(1)
               var priceHigh = $(this).next().text().trim().substring(1)
-              var ratio = (priceLow/priceHigh+'').substring(0,4)
-              var parentGood = $(this).parent().parent().parent().parent().parent().parent().parent() 
+              var ratio = (priceLow / priceHigh + '').substring(0, 4)
+              var parentGood = $(this).parent().parent().parent().parent().parent().parent().parent()
               var iconGood = parentGood.find('img.product-tile-srp__image')
               var aGood = parentGood
               var title = aGood.find('h3.product-tile-srp__title').text().trim()
               var aBrand = "TODO"
-              if ( ratio<=0.9 || 1==1 ) {
-                console.log( priceHigh+':cheap to:'+priceLow+":"+ratio+"\n"+title+"\n"+aGood.attr('href')+"\n" )
+              if (ratio <= 0.9 || 1 == 1) {
+                console.log(priceHigh + ':cheap to:' + priceLow + ":" + ratio + "\n" + title + "\n" + aGood.attr('href') + "\n")
 
                 var deal = {
-                  'p1':priceHigh
-                  ,'p2':priceLow
-                  ,'ratio':ratio
-                  ,'desc':title
-                  ,'href':constant.urlBase+aGood.attr('href')
-                  ,'icon':iconGood.attr('src')
-                  ,'brand':aBrand
-                  ,'input':datetime
+                  'p1': priceHigh,
+                  'p2': priceLow,
+                  'ratio': ratio,
+                  'desc': title,
+                  'href': constant.urlBase + aGood.attr('href'),
+                  'icon': iconGood.attr('src'),
+                  'brand': aBrand,
+                  'input': datetime
                 }
                 deals.push(deal)
               }

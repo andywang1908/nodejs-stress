@@ -58,7 +58,6 @@ var main = function(taskFolder) {
   genHtml(summary, taskFolder)
 
   var mapTask = require(taskFolder+'mapTask.js')
-  var singleDraw = require(taskFolder + 'singleDraw.js')
 
   mapTask.mapTask(tasks)
     .then(function() {
@@ -67,8 +66,14 @@ var main = function(taskFolder) {
       //Util.logConsole('debug', tasks)
 
       return Promise.map(tasks, function(task) {
+
+        var Multi = require(taskFolder + 'singleDraw.js').Multi
+        var singleDraw = new Multi()
+        singleDraw.task = task
+        //singleDraw = require(taskFolder + 'singleDraw.js')
+
         return singleDraw.singleDraw(task, summary, tasks)
-      }, { concurrency: 5 }).then(function() {
+      }, { concurrency: 2 }).then(function() {
         Util.logFile(taskFolder + 'kpi.json', JSON.stringify(summary))
       })
     })
@@ -83,4 +88,4 @@ var main = function(taskFolder) {
     })
 }
 
-main('./task/sportchek/')
+main('./task/hotDraw/')

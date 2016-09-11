@@ -1,1835 +1,690 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-  
-  <head>
-   <!-- template: shop/shop_power_tmpl.html -->
-<title>SanMar Canada  </title>
-    <link rel="stylesheet" media="all" href="/css/global.css" />
-    <script language="javascript" src="/js/suckerfish.js"></script>
-  </head>
-  <body >
-
-
-
-
-
-
-<a name="top"></a>
-<style type="text/css">
-<!--
-.gray {
-	color: #b0ff63;
-}
--->
-</style>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
-<!--[if lt IE 9]>
-<script src="/js/html5shiv.js"></script>
-<![endif]-->
-<script src="/js/slider/jquery.slider.min.js"></script>
-<script src="/js/plugins.js"></script>
-<script src="/js/main.js"></script>
-<script type="text/javascript" src="dropmenu-script.js"></script>
-    
-<script language="javascript">
-
-$(document).ready(function(){
-	var oNavCategories = {
-	        "New Styles": "6155",
-	        "Sport Shirts": "106",
-	        "Woven Shirts": "107",
-			"Workwear": "26612",
-	        "T-Shirts": "110",
-	        "Ladies Only": "113",
-	        "Activewear": "112",
-	        "Youth Only": "114",
-	        "Fleece": "111",
-	        "Outerwear": "109",
-	        "Headwear": "8605",
-	        "Accessories": "412",
-	        "Bottoms": "115",
-	        "Discontinued": "4159"
-	};
-	var sCatalogNav = "";
-
-	$.each(oNavCategories, function(i, val) {
-	sCatalogNav = sCatalogNav + "<li><a href='/cs/CatalogBrowser?id=" + val + "'>" + i + "</a></li>"
-	});
-
-	$("#CatalogNav").html( sCatalogNav );
-
-	r = Math.random().toString(); 
-		$.get("/amilogin.jsp", "r="+r, function(resp) {
-		    if ($.trim(resp) == "Y") {
-		        $('#logout').css('display','');
-		    } 
-		    else
-		    {
-		        $.get("/smc_shop/amilogin.jsp", "r="+r,  function (yesorno) {
-		            if ($.trim(yesorno) == "Y") 
-		            {
-		            	var tmpStyleIdChecklog = '-1';
-						if(tmpStyleIdChecklog)
-							$("#onlineordering").show();
-							
-		               showLogout();
-		            }
-		            else
-		            {
-		               showLogin();
-		            }
-		        });
-		    }
-		});
-		
-});
-
-/* Login/Logout */
-function showLogin(){
-	$("#LoginLogoutImage").prop("src", "/images/login.png");
-	$("#LoginLogoutLink").prop("href", "javascript:login()");
-	$("#LoginLogoutLink").fadeIn(100);
-}
-
-function showLogout(){
-	$("#LoginLogoutImage").prop("src", "/images/logout.png");
-	$("#LoginLogoutLink").prop("href", "javascript:logout()");
-	$("#LoginLogoutLink").fadeIn(100);
-}
-
-function login(){
-	$("#loginform").submit();
-}
-
-function logout() {
-	$.get("/logout.jsp", "r="+r, function() {
-	        $.get("/smc_shop/logout.jsp", "r="+r, function() {
-	            window.location.replace("/index.jsp");
-	        });
-	    });
-}
-
-</script>
-<header>
-	<div class="outer_wrapper">
-    <a href="/index.jsp"><img src="/images/header_icon.png" class="title_logo" alt="SanMar Canada" /></a>
-    <div class="header_right">
-        <nav class="search_nav">
-            <ul>
-                
-                <li style="margin-top: 5px; margin-right: -1px;">
-                    <form name="QSrchForm" method="post" action="/cs/CatalogBrowser" onSubmit="submitQSrchForm()"> <!-- /cs/CatalogBrowser -->
-                        <input type="image" src="/images/hdr_searchbtn.png" />
-                        <input type="text" style="width: 140px" autocomplete="on" placeholder="style#, brand, colour, description" value="" name="query" />
-                        <!-- <input type="image" src="/images/hdr_searchbtn.png" /> -->
-                        <input type="hidden" name="action" value="search" />
-                    </form>
-                </li>
-                  
-                <li style="width: 138px;">
-                    <a href="" id="LoginLogoutLink" style="display:none;"><img src="" alt="SanMar Canada" id="LoginLogoutImage" /></a>
-                </li>
-                <div style="display:none;">
-                	<form id="loginform" method="POST" action="/smc_shop/shop">
-                		<input type="hidden" name="h" value="login" />
-                	</form>
-                </div>                 
-            </ul>
-        </nav>
-        <!-- dropstart -->
-        <ul class="menu" id="menu">
-	<li><a href="/productspotlight/" class="menulink">Shop Catalogue&nbsp;&nbsp;<img src="/images/arrow-down.png" /></a>
-	  <ul>
-			<!-- <li><a href="/cs/CatalogBrowser?id=38089">Coming Soon</a></li> -->
-            <li><a href="/cs/CatalogBrowser?id=6155">New Styles</a></li>
-            <li><a href="/productspotlight/">Product Spotlight</a></li>
-            <li><a href="/catalogue/order/">Order Catalogues</a></li>
-			<li>
-				<a href="#" class="sub">Shop By Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/arrow.png" /></a>
-				<ul><li>
-					<li class="topline"><a href="/cs/CatalogBrowser?id=34794">DryFrame&#174;</a></li>
-                    <li><a href="/cs/CatalogBrowser?id=21927">Coal Harbour<sup>&#174;</sup></a></li>
-					<li><a href="/cs/CatalogBrowser?id=21926">ATC&#153;</a></li>
-                    <li><a href="/cs/CatalogBrowser?id=31024">ATC&#153; by Flexfit<sup>&#174;</sup></a></li>
-                    <li><a href="/cs/CatalogBrowser?id=38608">KOI<sup>&#174;</sup></a></li>
-                    <li><a href="/cs/CatalogBrowser?id=38260">RealTree<sup>&#174;</sup></a></li>
-                    <li><a href="/cs/CatalogBrowser?id=36351">EuroSpun</a></li>
-					<li><a href="/cs/CatalogBrowser?id=20805">OGIO<sup>&#174;</sup></a></li>
-                    <li><a href="/cs/CatalogBrowser?id=38087">Callaway</a></li>
-					<li><a href="/cs/CatalogBrowser?id=21928">New Era<sup>&#174;</sup></a></li>
-					<li><a href="/cs/CatalogBrowser?id=21914">Gildan<sup>&#174;</sup></a></li>
-                    <li><a href="/cs/CatalogBrowser?id=28208">Eddie Bauer<sup>&#174;</sup></a></li>
-	                <li><a href="/cs/CatalogBrowser?id=21904">Fruit Of The Loom<sup>&#174;</sup></a></li>
-	                <li><a href="/cs/CatalogBrowser?id=21925">Bella + Canvas<sup>&#174;</sup></a></li>
-                    <li><a href="/cs/CatalogBrowser?id=26194">Red Kap<sup>&#174;</sup></a></li>
-				</ul>
-			</li>
-			<li><a href="/cs/CatalogBrowser?id=106">Sport Shirts</a>
-			<li><a href="/cs/CatalogBrowser?id=107">Woven Shirts</a></li>
-            <li><a href="/cs/CatalogBrowser?id=26612">Workwear</a></li>
-			<li><a href="/cs/CatalogBrowser?id=110">T-Shirts</a></li>
-            <li><a href="/cs/CatalogBrowser?id=113">Ladies' Only</a></li>
-            <li><a href="/cs/CatalogBrowser?id=112">Activewear</a></li>
-            <li><a href="/cs/CatalogBrowser?id=114">Youth Only</a></li>
-            <li><a href="/cs/CatalogBrowser?id=111">Fleece</a></li>
-            <li><a href="/cs/CatalogBrowser?id=109">Outerwear</a></li>
-            <li><a href="/cs/CatalogBrowser?id=8605">Headwear</a></li>
-            <li><a href="/cs/CatalogBrowser?id=2634">Bags</a></li>
-            <li><a href="/cs/CatalogBrowser?id=412">Accessories</a></li>
-            <li><a href="/cs/CatalogBrowser?id=115">Pants/Shorts</a></li>
-            <li><a href="/cs/CatalogBrowser?id=4159">Disco Zone</a></li>
-		</ul>
-  </li>
-    
-    <!-- Marketing Tools Drop -->
-    
-	    <li><a href="/marketing/" class="menulink">Marketing Tools&nbsp;&nbsp;<img src="/images/arrow-down.png" /></a>
-		<ul>
-			<li><a href="/marketing/eblast.shtml">Sales & Promotions</a></li>
-            <li><a href="/marketing/flyerWizard.shtml">Flyer Wizard</a></li>
-            <li><a href="/marketing/customSite.shtml">Custom Websites</a></li>
-            <li><a href="/marketing/imagelibrary.shtml">Image Library</a></li>
-            <li><a href="/marketing/pdf-lookbooks.shtml">PDF/Lookbooks</a></li>
-            <li><a href="/marketing/priceLists.shtml">Price Lists</a></li>
-            <li><a href="https://vimeo.com/sanmarcanada/videos">Videos</a></li>
-            <li><a href="/marketing/samplepacks.shtml">Sample Packs</a></li>
-            <!-- <li><a href="/marketing/glossary.shtml">Glossary</a></li> -->
-            <!-- <li><a href="/marketing/webdev.shtml">Web Developer</a></li> -->
-            <li><a href="/marketing/findadecorator.shtml">Find-A-Decorator (FAD)</a></li>
-		</ul>
-	</li>
-    
-    <!-- END Marketing Tools Drop -->
-    
-    <!-- About Us Drop -->
-  <li>
-		<a href="/aboutus/" class="menulink">About Us&nbsp;&nbsp;<img src="/images/arrow-down.png" /></a>
-		<ul>
-			<li><a href="/aboutus/contactus.shtml">Contact Us</a></li>
-            <li><a href="/aboutus/websupport.shtml">Web Marketing Support Team</a></li>
-			<li><a href="/aboutus/locations.shtml">Locations</a></li>
-			<li><a href="/aboutus/credit.shtml">Become a Customer</a></li>
-			<li><a href="/aboutus/industryLinks.shtml">Industry Links</a></li>
-			<li><a href="/aboutus/history.shtml">Company History</a></li>
-            <li><a href="/aboutus/privacy.shtml">Privacy Policy</a></li>
-            <li><a href="/aboutus/socialresponsibility.shtml">Social Responsibility</a></li>
-            <li><a href="/aboutus/termsofuse.shtml">Terms Of Use</a></li>
-            <li><a href="/aboutus/careers.shtml">Careers</a></li>
-            <li><a href="/csservice/ra">Return Authorization</a></li>
-			
-		</ul>
-</li>
-    <li><a href="#" class="menulink"><img src="/images/icon_canflag.png" />Region</a>
-    <ul>
-			<li><a href="/fr_index.jsp?lang=fr">Fran&ccedil;ais</a></li>
-			<li><a href="/index.jsp?lang=en">English</a></li>
-</ul>
-</li>
-        <!-- dropend -->
-    </div>
-</div>
-</header>
-<div id="body">
-<script type="text/javascript">
-	var menu=new menu.dd("menu");
-	menu.init("menu","menuhover");
-</script>
- 
-<!-- <script language="javascript" src="/js/jquery-1.6.3.min.js"></script> -->
-<script language="javascript">
-
-	//This is now handled in topheader.html
-	/*
-	    var maincatnames = new Array("New Styles","Sport Shirts","Woven Shirts","T-Shirts","Ladies Only","Activewear","Youth Only","Fleece","Outerwear","Headwear","Accessories","Bottoms","Discontinued");
-	    var maincatids = new Array("6155","106","107","110","113","112","114","111","109","8605","412","115","4159");
-	    var maincatnavs = "<ul>";
-	    for (var i=0; i<maincatnames.length; i++) {
-	        maincatnavs += "<li><a href=\"/cs/CatalogBrowser?id="+maincatids[i]+"\">"+maincatnames[i]+"</a>";
-	    }
-	    maincatnavs += "</ul>";
-	    
-	    var catURLnName="";
-	    var catid="";
-	    var found = false;
-	    if (catid.length > 0) {
-	        for (var i=0; i<maincatids.length && found==false; i++) {
-	            if (maincatids[i] == catid) {
-	                catURLnName = "<a href=\"/cs/CatalogBrowser?id="+catid+"\">"+maincatnames[i]+"</a>";
-	                found = true;
-	            }
-	        }
-	    }
-    */
-    
-
-     /*
-    r = Math.random().toString(); 
-    jQuery(document).ready(function(e) {
-        jQuery.get("/amilogin.jsp", "r="+r, function(resp) {
-            if (jQuery.trim(resp) == "Y") {
-                jQuery('#logout').css('display','');
-            } else {
-                jQuery.get("/smc_shop/amilogin.jsp", "r="+r,  function (yesorno) {
-                    if (jQuery.trim(yesorno) == "Y") {
-                       jQuery('#logout').css('display', '');
-                    }
-                });
-            }
-        });
-     });
-
-    function logout() {
-	jQuery.get("/logout.jsp", "r="+r, function() {
-            jQuery.get("/smc_shop/logout.jsp", "r="+r, function() {
-                window.location.replace("/index.jsp");
-            });
-        });
-    }
-    */
-        
-</script>
-<!-- 
-<table cellpadding="0" cellspacing="0" border="0" id="globalnav">
-	<tr>
-		<td class="francais"><a href="/index.jsp?lang=fr">Fran&ccedil;ais</a></td>
-		<td>
-			<ul id="nav">
-				<li class="tab"><a href="#"><img src="/images/nav_markeing.gif" alt="Marketing Tools" width="145" height="31" /></a>
-					<ul>
-						<li><a href="/marketing/flyerWizard.shtml">Flyer Wizard</a></li>
-						<li><a href="/marketing/customSite.shtml">Custom Websites</a></li>
-						<li><a href="/marketing/imagelibrary.shtml">Image Library</a></li>
-						<li><a href="/marketing/priceLists.shtml">Price Lists &amp; Promotions</a></li>
-						<li><a href="/marketing/glossaryAB.shtml">Glossary</a></li>
-					</ul>
-				</li>
-				<li class="tab"><a href="#"><img src="/images/nav_catalogue.gif" alt="SanMar Catalogue" width="145" height="31" /></a>
-                <script>document.write(maincatnavs);</script>
-				</li>
-				<li><a href="/aboutus/index.jsp"><img src="/images/nav_about.gif" alt="About Us" width="145" height="31" /></a>
-					<ul>
-						<li><a href="/aboutus/contactus.shtml">Contact Us</a></li>
-						<li><a href="/aboutus/locations.shtml">Locations</a></li>
-						<li><a href="/aboutus/credit.shtml">Become a Customer</a></li>
-						<li><a href="/aboutus/industryLinks.shtml">Industry Links</a></li>
-						<li><a href="/aboutus/history.shtml">SanMar History</a></li>
-						<li><a href="/aboutus/privacy.shtml">Privacy Policy</a></li>
-					</ul>
-				</li>
-				<li id="logout" class="tab" style="display:none; height:20px !important; width:130px !important; *width:141px !important; margin-right:0px !important; *margin-right:-4px !important; border-right:0 !important;"><img src="/images/nav_logout.gif" onClick="logout();" alt="Log Out" height="19" width="141" style="margin-bottom:2px; margin-right:0px !important;"/>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="en" name="language" />
+	<meta content="ServiceOntario - Government of Ontario, Canada" name="dc.title" />
+	<meta content="resourceList" name="dc.type" scheme="gotcv" />
+	<meta content="text/html" name="dc.format" scheme="IMT" />
+	<meta content="http://www.serviceontario.ca/" name="dc.identifier" scheme="URI" />
+	<meta content="1" name="go.version" />
+	<meta content="ServiceOntario" name="dc.description" />
+	<meta content="ServiceOntario" name="Description" />
+	<meta content="Government of Ontario, Ministry of Government Services" name="dc.creator" />
+	<meta content="ServiceOntario, Service Ontario; Ontario" name="dc.subject" scheme="goscv" />
+	<meta content="ServiceOntario, Service Ontario, Ontario" name="Keywords" />
+	<meta content="Government of Ontario, Ministry of Government Services" name="dc.publisher" />
+	<meta content="Government of Ontario, Ministry of Government Services" name="dc.contributor" />
+	<meta content="2012-11-01" name="dc.date.created" scheme="W3CDTF" />
+	<meta content="2014-07-20" name="dc.date.modified" scheme="W3CDTF" />
+	<meta content="" name="dc.date.valid" scheme="W3CDTF" />
+	<meta content="Eng" name="dc.language" scheme="ISO639-2" />
+	<meta content="Province of Ontario" name="dc.coverage.jurisdiction" />
+	<meta content="Ontario, Canada" name="dc.coverage.spatial" />
+	<meta content="Copyright: Queen's Printer for Ontario, 2014" name="dc.rights.intellectualProperty" />
+	<meta content="website.contact@mbs.gov.on.ca" name="go.contact.content" />
+	<meta content="website.contact@mbs.gov.on.ca" name="go.contact.technical" />
+	<meta content="10" name="revisit-after" />
+	<meta content="Government" name="classification" />
+	<meta content="General" name="rating" />
+	<meta content="&copy; Queen's Printer for Ontario, 2014" name="copyright" />
+	<meta content="NOINDEX,NOFOLLOW" name="ROBOTS" />
+	
+	<!-- *** START loading common JS/CSS via modularization framework *** -->
+	<!-- *** Note: Common S2i files loaded via modularization framework *** -->
+	<link rel="stylesheet" href="/sodp/contenthandler/s2i/!ut/p/digest!yOgaupeEHLGevHIYk7Or1Q/sp/mashup:ra:collection?themeID=ZJ_V7H8POO618AT20AODBCS9L30G4&amp;eoffset=3&amp;locale=en&amp;entry=s2iMobile_portal_theme_head__0.0%3Ahead_css&amp;mime-type=text%2Fcss&amp;soffset=0" type="text/css"/><script type="text/javascript" src="/sodp/contenthandler/s2i/!ut/p/digest!Fva2HYsBlABIrLgnl0YVrA/mashup/ra:collection?themeID=ZJ_V7H8POO618AT20AODBCS9L30G4&amp;locale=en&amp;entry=wp_client_main__0.0%3Ahead_js&amp;entry=s2iMobile_portal_theme_head__0.0%3Ahead_js&amp;mime-type=text%2Fplain"></script><!-- *** END loading common JS/CSS via modularization framework *** -->
+	
+	<!-- rel=dynamic-content indicates an element that is replaced with the contents produced by the specified href.
+		 dyn-cs:* URIs are resolved using the WP DynamicContentSpotMappings resource environment provider. These values can
+		 also be set using theme metadata if a theme is specified in the URI (e.g. @tl:oid:theme_unique_name). -->	
+	
+<meta name="device_class" content="desktop" />
+<meta name="format-detection" content="telephone=no">
+
+<meta name="ga.pg" content="HOT_DRAW_Product_Info_Page|HOT Lanes Permit Draw - Introduction" />
+
+
+<meta name="ca.on.gov.sess.fullsite.override" content='' />
+
+
+		<title>Government of Ontario - HOT Permit Draw Application</title>
+	
+
+<meta name="sodp.productGroup" content="hot01" />
+
+
+		<link id="pageCSS" rel="Stylesheet" type="text/css" href="/s2iMobileThemeStatic/themes/s2iMobile/css/s2i/s2i.desktop.css" />
+		<!--[if lt IE 9]>
+			<link id="ieCSS" rel="Stylesheet" type="text/css" href="/s2iMobileThemeStatic/themes/s2iMobile/css/s2i/s2i.ie8.css" />
+			<script src="/s2iMobileThemeStatic/themes/s2iMobile/js/html5shim/html5shiv.js" type="text/javascript"></script>
+			<script>
+				var IsIE = true;
 				
-				</li>
-			</ul>
-		</td>
-		<td>&nbsp;</td>
-	</tr>
-</table>
--->
-<table cellpadding="0" cellspacing="0" border="0" id="main">
-	<tr>
-		<td class="leftnav">
-            
-			<div class="promos">
-				<!-- 
-<a href="/eblast/2012/feb/27/FreeFreight.html" onmouseover='window.status=" Click here for more details.                     ";return true;'  onmouseout="window.status=''; return true;"><img src="/mainpgs/homepage/SWAd/free_freight_banner.jpg" width="142" height="117" border="0" alt=" Click here for more details!                     " /></a>
--->
+				// to Hide empty error tags in IE8
+				$(document).ready(function () {
+					$(".Errors:empty").addClass("Hide");
+					$(".Error:empty").addClass("Hide");
+				});
+			</script>
+		<![endif]-->
+	
+   <link id="com.ibm.lotus.NavStateUrl" rel="alternate" href="/sodp/portal/s2i/!ut/p/b1/hc7fboIwFAbwZ_EBltPa2pbLUhBkhLIVHPSGYGTOP2Bgc8l8-mGym21Rv7sv-Z2TDyyUD5hjSgTmgkABtqs_t5v6Y3vs6sOlW1YteShSrRnWWeQjmQXTZIldhBYUXkZSjgRdiUT3P9jfJHjKxztPJd5cOERq_A8wXyAZkygwnkuEoH-B4MxFUrhzyRw6RYb_gBsjyxHwazMDzCCDAtHK7L4GfVYkMeYcxc5jGqt9n63zUJ3y_awvhme2almzrg_qXUk_XfWnzQRM01VKQhIe2wZa-_ZqFrvZQOXkG19gqyQ!/dl4/d5/L2dJQSEvUUt3QS80SmtFL1o2X1Y3SDhQT082MU9USkUwQVRHMk5WMUIwMEk0/"></link>
+   <link rel="bookmark" title='HOT Permit Draw Application' href='/sodp/portal/s2i/!ut/p/b1/hc7fboIwFAbwZ_EBltPa2pbLUhBkhLIVHPSGYGTOP2Bgc8l8-mGym21Rv7sv-Z2TDyyUD5hjSgTmgkABtqs_t5v6Y3vs6sOlW1YteShSrRnWWeQjmQXTZIldhBYUXkZSjgRdiUT3P9jfJHjKxztPJd5cOERq_A8wXyAZkygwnkuEoH-B4MxFUrhzyRw6RYb_gBsjyxHwazMDzCCDAtHK7L4GfVYkMeYcxc5jGqt9n63zUJ3y_awvhme2almzrg_qXUk_XfWnzQRM01VKQhIe2wZa-_ZqFrvZQOXkG19gqyQ!/dl4/d5/L2dJQSEvUUt3QS80SmtFL1o2X1Y3SDhQT082MU9USkUwQVRHMk5WMUIwMEk0/' hreflang="en"/>
+
+
+<link href="/sodp/contenthandler/s2i/!ut/p/digest!yOgaupeEHLGevHIYk7Or1Q/war/s2iMobileThemeStatic/themes/s2iMobile/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+
+<body id="pageContainer" class="S2i tundra locale_en">
+
+	<!-- iWidgets will fill in the two empty divs below -->
+	<div id="customizeShelfContainer"></div><!-- used by the mm_customize_shelf module -->
+	<div id="pageToolbarButtons"></div><!-- used by the mm_page_toolbar module -->
+
+	<div class="wpthemeFrame">
+							
+		<header class="Header" role="banner" id="header" tabindex="0">
+			<!-- Theme header and site navigation including page title and flyout menus on desktop -->
+			
+<script type="text/javascript">
+	var userLang = "en";
+	// hot01
+	
+	$(document).ready(function () {
+		S2i.Timeout.sessTime = "20";
+		S2i.Timeout.sessMsg = "Your session is about to expire. Please click OK if you wish to continue your session.";
+		S2i.Timeout.sessUrl = "/sodp/poc/s2i?uri=s2i:HOT01Info&S2ITransactionID={s2iRef}&S2iErrorCode=S2I_ERR_0007&lang=en";
+		S2i.Timeout.dvs = false;
+		S2i.Timeout.active = true;
+	});
+</script>
+
+<div class="ServiceHeader"><div class="InnerWidth">
+	<h1 class="SO">
+		
+			<a href="http://www.ontario.ca/government/services" 
+			   title="Select this link to go to ServiceOntario.ca" target="_blank">
+				<img alt="ServiceOntario logo" 
+					 src="/s2iMobileThemeStatic/themes/s2iMobile/images/s2i.logo.png" />
+			</a>
+		
+	</h1>
+
+	<nav class="SkipToNav" role="navigation">
+		<h2 class="Offscreen-Text">Start of ServiceOntario.ca skip to page section links</h2>
+		<ul>
+			<li><a href="#content">Skip to content</a></li>
+			<li><a href="#footer">Skip to footer</a></li>
+			<li><a id="skipToErrorLink" href="#errors">Skip to error</a></li>
+		</ul>
+	</nav>
+</div></div>
+	
+<div class="wpthemeSecondaryBanner"><div class="wpthemeInner">
+
+
+<div class="wpthemeClear"></div>
+</div><!-- end wpthemeInner --></div><!-- end wpthemeSecondaryBanner (site navigation) -->
+<div class="AppTitle">
+	<div class="InnerWidth">
+		<div class="CartLink" id="HdrCartLink"></div>
+		<h2 class="Title" id="AppTitle" aria-owns="content">
+            HOT Permit Draw Application
+        </h2>
+	</div>
+</div><!-- end of Theme header and site navigation: do not remove this comment -->
+		</header>
+
+		<div class="wpthemeClear"></div>
+
+		<!-- start main content -->
+		<div id="content" class="wpthemeMainContent" role="main" tabindex="0">
+			<div class="wpthemeInner">
+				<div class="wpthemeClear"></div>
+				<div id="wpthemeStatusBarContainer"></div>
 			</div>
-		</td>
-		<td class="contentarea">
 
-      <h1 class="mapleleaf">Power Shop</h1>
-      <p>&nbsp;</p>
-      <div id="onlineordering">
-
-
-
-
-
-
-
-
-      <form method="POST" action="/smc_shop/shop">
-        <input type="hidden" name="h" value="power" />
-        <input type="hidden" name="lang" value="en" />
-        <table border="0" cellpadding="0" cellspacing="0" class="search">
-          <tr>
-          	<td colspan="2"><strong>Search Style:</strong></td>
-          </tr>
-          <tr>
-           
-            <td><input type="text" name="searchStyle" value="" /></td>
-            <td><input type="image" src="/images/bt_search.png" alt="Search" border="0" value="Submit" /></td>
-          </tr>
-        </table>
-      </form>
-      
-      <form method="POST" action="/smc_shop/shop">
-        <input type="hidden" name="h" value="power" />
-        <input type="hidden" name="lang" value="en" />
-        <table border="0" cellpadding="0" cellspacing="0" class="search">
-          <tr>
-            <td colspan="2"><strong><br />Select Style:</strong></td>
-          </tr>
-          <tr>
-            <td><select name="selectStyle" style="width:520px !important;">
-                  <option value=""></option>
-                  <option value="0220" ><b>GILDAN<sup>&#174;</sup></b> ULTRA COTTON<sup>&#174;</sup> TANK TOP.  0220</option>
-                  <option value="1001" ><b><i>DISCONTINUED</i> Bella&reg; </b> Ladies' Crewneck T.  1001</option>
-                  <option value="1003" ><b><i>DISCONTINUED</i> BELLA+CANVAS<sup>&#174;</sup></b> BABY RIB SHORT SLEEVE SCOOP NECK LADIES' TEE. 1003</option>
-                  <option value="1005" ><b>BELLA+CANVAS<sup>&#174;</b> BABY RIB SHORT SLEEVE V-NECK LADIES' TEE. 1005</option>
-                  <option value="1080" ><b>BELLA+CANVAS<sup>&#174;</b> BABY RIB LADIES' TANK.  1080</option>
-                  <option value="108085" ><b>OGIO<sup>&#174;</b> CRUNCH DUFFEL. 108085</option>
-                  <option value="108087" ><b>OGIO<sup>&#174;</b> BIG DOME DUFFEL. 108087</option>
-                  <option value="108089" ><b>OGIO<sup>&#174;</b> RAGE DUFFEL. 108089</option>
-                  <option value="117023" ><b>OGIO<sup>&#174;</b> VOYAGER MESSENGER. 117023</option>
-                  <option value="125023" ><b><i>DISCONTINUED</i> OGIO&#174;</b> GROM II STAND BAG. 125023</option>
-                  <option value="1801" ><b>GILDAN<sup>&#174;</sup></b> HEAVY BLEND&#153; CREWNECK SWEATSHIRT. 1801</option>
-                  <option value="180B" ><b>GILDAN&#174;</b> HEAVY BLEND&#153; CREWNECK YOUTH SWEATSHIRT. 180B</option>
-                  <option value="1820" ><b>GILDAN<sup>&#174;</sup></b> HEAVY BLEND&#153; SWEATPANTS. 1820</option>
-                  <option value="182B" ><b>GILDAN<sup>&#174;</sup></b> HEAVY BLEND&#153; YOUTH SWEATPANTS. 182B</option>
-                  <option value="1840" ><b><i>DISCONTINUED</i> GILDAN&#174;</b> HEAVY BLEND&#153; OPEN BOTTOM SWEATPANTS. 1840</option>
-                  <option value="1850" ><b>GILDAN<sup>&#174;</sup></b> HEAVY BLEND&#153; HOODED SWEATSHIRT. 1850</option>
-                  <option value="185B" ><b>GILDAN<sup>&#174;</sup></b> HEAVY BLEND&#153; HOODED YOUTH SWEATSHIRT. 185B</option>
-                  <option value="1860" ><b>GILDAN<sup>&#174;</sup></b> HEAVY BLEND&#153; FULL ZIP HOODED SWEATSHIRT. 1860</option>
-                  <option value="186B" ><b>GILDAN<sup>&#174;</sup></b> HEAVY BLEND&#153; FULL ZIP HOODED YOUTH SWEATSHIRT. 186B</option>
-                  <option value="2000" ><b>GILDAN<sup>&#174;</sup></b> ULTRA COTTON<sup>&#174;</sup> T-SHIRT. 2000</option>
-                  <option value="2000T" ><b>GILDAN<sup>&#174;</sup></b> ULTRA COTTON<sup>&#174;</sup> TALL T-SHIRT. 2000T</option>
-                  <option value="200B" ><b>GILDAN<sup>&#174;</sup></b> ULTRA COTTON<sup>&#174;</sup> YOUTH T-SHIRT.  200B</option>
-                  <option value="200L" ><b><i>DISCONTINUED</i> Gildan&reg; </B> Ladies' Ultra Cotton&reg; T-Shirt.  200L</option>
-                  <option value="2300" ><b>GILDAN<sup>&#174;</sup></b> ULTRA COTTON<sup>&#174;</sup> POCKETED T-SHIRT. 2300</option>
-                  <option value="2400" ><b>GILDAN<sup>&#174;</sup></b> ULTRA COTTON<sup>&#174;</sup> LONG SLEEVE T-SHIRT. 2400</option>
-                  <option value="240B" ><b>GILDAN<sup>&#174;</sup></b> ULTRA COTTON<sup>&#174;</sup> LONG SLEEVE YOUTH T-SHIRT. 240B</option>
-                  <option value="240L" ><b><i>DISCONTINUED</i> Gildan&#174;</b> Ultra Cotton&reg;  Ladies' Long Sleeve T-Shirt.  240L</option>
-                  <option value="2600" ><b><i>DISCONTINUED</i> Gildan&reg; </b>  Ultra Cotton&reg; Ringer T.  2600</option>
-                  <option value="2700" ><b><i>DISCONTUNED</i> GILDAN&#174;</b> ULTRA COTTON&#174; SLEEVELESS T-SHIRT. 2700</option>
-                  <option value="2800" ><b><i>DISCONTINUED</i> GILDAN&#174;</b> ULTRA COTTON&#174; JERSEY SPORT SHIRT. 2800</option>
-                  <option value="3001" ><b>BELLA+CANVAS<sup>&#174;</b> JERSEY TEE. 3001</option>
-                  <option value="3005" ><b>BELLA+CANVAS<sup>&#174;</b> JERSEY SHORT SLEEVE V-NECK TEE. 3005</option>
-                  <option value="3200" ><b>BELLA+CANVAS<sup>&#174;</b> � SLEEVE BASEBALL TEE. 3200</option>
-                  <option value="3413" ><b>BELLA+CANVAS<sup>&#174;</b> TRIBLEND TEE. 3413</option>
-                  <option value="3415" ><b>BELLA+CANVAS<sup>&#174;</b> TRIBLEND V-NECK TEE. 3415</option>
-                  <option value="3480" ><b>BELLA+CANVAS<sup>&#174;</b> JERSEY TANK. 3480</option>
-                  <option value="3501" ><b>BELLA+CANVAS<sup>&#174;</sup></b> JERSEY LONG SLEEVE TEE. 3501</option>
-                  <option value="3650" ><b>BELLA+CANVAS<sup>&#174;</sup></b> POLY-COTTON SHORT SLEEVE TEE. 3650</option>
-                  <option value="3739" ><b>BELLA+CANVAS<sup>&#174;</SUP></b> POLY-COTTON FLEECE FULL ZIP. 3739</option>
-                  <option value="3800" ><b><i>DISCONTINUED</i> GILDAN&#174;</b> ULTRA COTTON&#174; PIQUE SPORT SHIRT. 3800</option>
-                  <option value="3930BR" ><b>FRUIT OF THE LOOM<sup>&#174;</b> HD COTTON&#153; YOUTH T-SHIRT. 3930BR</option>
-                  <option value="3930R" ><b>FRUIT OF THE LOOM<sup>&#174;</b> HD COTTON<sup>TM</SUP> T-SHIRT. 3930R</option>
-                  <option value="3939" ><b>BELLA+CANVAS&#153;</b> TRIBLEND FULL ZIP LIGHTWEIGHT HOODIE. 3939</option>
-                  <option value="39VR" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> HD COTTON&#153; V-NECK T-SHIRT. 39VR</option>
-                  <option value="411043" ><b>OGIO<sup>&#174;</b> JUGGERNAUT BACKPACK. 411043</option>
-                  <option value="411047" ><b>OGIO<sup>&#174;</b> SQUADRON BACKPACK. 411047</option>
-                  <option value="411053" ><b>OGIO<sup>&#174;</b> MARSHALL BACKPACK. 411053</option>
-                  <option value="411054" ><b><i>DISCONTINUED</i> OGIO&#174;</b> REBEL 17" LAPTOP BACKPACK. 411054</option>
-                  <option value="411063" ><b>OGIO<sup>&#174;</b> COLTON BACKPACK. 411063</option>
-                  <option value="411064" ><b>OGIO<sup>&#174;</b> BULLION BACKPACK. 411064</option>
-                  <option value="411065" ><b>OGIO<sup>&#174;</b> MERCUR BACKPACK. 411065</option>
-                  <option value="411069" ><b>OGIO<sup>&#174;</b> EXCELSIOR BACKPACK. 411069</option>
-                  <option value="411086" ><b> OGIO<sup>&#174;</b> SLY BACKPACK. 411086</option>
-                  <option value="411087" ><b>OGIO<sup>&#174;</b> BOLT BACKPACK. 411087</option>
-                  <option value="411090" ><b>OGIO<sup>&#174;</b> APEX RUCK SACK. 411090</option>
-                  <option value="412025" ><b>OGIO<sup>&#174;</sup></b> ENDURANCE 9.0 DUFFEL. 412025</option>
-                  <option value="412030" ><b>OGIO<sup>&#174;</sup></b> ENDURANCE 2.0 DUFFEL. 412030</option>
-                  <option value="412031" ><b>OGIO<sup>&#174;</sup></b> ENDURANCE 1.0 DUFFEL. 412031</option>
-                  <option value="412039" ><b>OGIO<sup>&#174;</sup></b> X-FIT BACKPACK.412039</option>
-                  <option value="412045" ><b>OGIO<SUP>&#174;</SUP></b> PULSE PACK. 412045</option>
-                  <option value="412046" ><b>OGIO<SUP>&#174;</SUP></b> SONIC PACK. 412046</option>
-                  <option value="413006" ><b>OGIO<sup>&#174;</b> CANBERRA 26" TRAVEL BAG. 413006</option>
-                  <option value="413007" ><b>OGIO<sup>&#174;</b> KICKSTART 22" TRAVEL BAG. 413007</option>
-                  <option value="413010" ><b>OGIO<sup>&#174;</b> HAMBLIN 30" WHEELED DUFFEL. 413010</option>
-                  <option value="417012" ><b>OGIO<sup>&#174;</b> VAULT MESSENGER. 417012</option>
-                  <option value="417014" ><b>OGIO<sup>&#174;</b> MODULE TABLET CASE. 417014</option>
-                  <option value="417018" ><b><i>DISCONTINUED</i> OGIO&#174;</b> LUCIN WHEELED BRIEFCASE. 417018</option>
-                  <option value="417028" ><b>OGIO<sup>&#174;</b> SHADOW TRAVEL KIT. 417028</option>
-                  <option value="417051" ><b>OGIO<sup>&#174;</b> APEX SLIM CASE. 417051</option>
-                  <option value="42000" ><b>GILDAN<sup>&#174;</sup></b> PERFORMANCE<sup>TM</sup> T-SHIRT. 42000</option>
-                  <option value="42000B" ><b>GILDAN<SUP>&#174;</SUP></b> PERFORMANCE<SUP>TM</SUP> YOUTH T-SHIRT. 42000B</option>
-                  <option value="42000L" ><b>GILDAN<sup>&#174;</sup></b> PERFORMANCE<sup>TM</SUP> LADIES' T-SHIRT. 42000L</option>
-                  <option value="421001" ><b>OGIO<sup>&#174;</b> 9800 WHEELED 34" RIG BAG. 421001</option>
-                  <option value="424011" ><b>OGIO<SUP>&#174;</b> VISION CART BAG. 424011</option>
-                  <option value="427001" ><b>OGIO<sup>&#174;</b> STRAIGHT JACKET II. 427001</option>
-                  <option value="4930BR" ><b>FRUIT OF THE LOOM<SUP>&#174;</SUP></b> HD COTTON<SUP>TM</SUP> LONG SLEEVE YOUTH T-SHIRT. 4930BR</option>
-                  <option value="4930R" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> HD COTTON<sup>TM</sup> LONG SLEEVE T-SHIRT. 4930R</option>
-                  <option value="5000" ><b>GILDAN<sup>&#174;</sup></b> HEAVY COTTON&#153; T-SHIRT. 5000</option>
-                  <option value="5000L" ><b>GILDAN<sup>&#174;</sup></b> HEAVY COTTON&#153; MISSY FIT T-SHIRT. 5000L</option>
-                  <option value="500B" ><b>GILDAN<sup>&#174;</sup></b> HEAVY COTTON&#153; YOUTH T-SHIRT. 500B</option>
-                  <option value="5250" ><b><i>DISCONTINUED</i> Hanes </b> Tagless&reg; T-Shirt. 5250</option>
-                  <option value="5400" ><b>GILDAN<sup>&#174;</sup></b> HEAVY COTTON<sup>TM</sup> LONG SLEEVE T-SHIRT. 5400</option>
-                  <option value="5400L" ><b><i>DISCONTINUED</i> GILDAN&#174;</b> HEAVY COTTON&#153; MISSY FIT LONG SLEEVE T-SHIRT. 5400L</option>
-                  <option value="5586" ><b><i>DISCONTINUED</i> Hanes </b>Tagless&reg; Long Sleeve T-Shirt. 5586</option>
-                  <option value="5590" ><b><i>DISCONTINUED</i> Hanes </b> Tagless&reg; Pocketed T-Shirt. 5590</option>
-                  <option value="6001" ><b><i>DISCONTINUED</i> Bella&reg; </b> Ladies' Short Sleeve Crewneck Jersey T.  6001</option>
-                  <option value="6004" ><b>BELLA+CANVAS<sup>&#174;</sup></b> THE FAVOURITE LADIES' TEE. 6004</option>
-                  <option value="6005" ><b>BELLA+CANVAS<sup>&#174;</sup></b> SHORT SLEEVE V-NECK JERSEY LADIES' TEE. 6005</option>
-                  <option value="6035" ><b>BELLA+CANVAS<sup>&#174;</sup></b> SHORT SLEEVE DEEP V-NECK JERSEY LADIES' TEE. 6035</option>
-                  <option value="611024" ><b>OGIO<sup>&#174;</b> PULL-THROUGH 22" TRAVEL BAG. 611024</option>
-                  <option value="611701" ><b><i>DISCONTINUED</i> OGIO&#174;</b> PULLEY COOLER. 611701</option>
-                  <option value="611901" ><b><i>DISCONTINUED</i> OGIO&#174;</b> DOPPLER KIT. 611901</option>
-                  <option value="6400" ><b>GILDAN<sup>&#174;</sup></b> SOFTSTYLE<sup>&#174;</sup> T-SHIRT. 6400</option>
-                  <option value="6405" ><b>BELLA+CANVAS<sup>&#174;</sup></b> RELAXED JERSEY SHORT SLEEVE V-NECK LADIES� TEE. 6405</option>
-                  <option value="640L" ><b>GILDAN<sup>&#174;</sup></b> SOFTSTYLE<sup>&#174;</sup> JUNIOR FIT LADIES' T-SHIRT. 640L</option>
-                  <option value="64V00" ><b>GILDAN<sup>&#174;</sup></b> SOFTSTYLE<sup>&#174;</sup> V-NECK T-SHIRT. 64V00</option>
-                  <option value="64V00L" ><b>GILDAN<sup>&#174;</sup></b> SOFTSTYLE<sup>&#174</sup> JUNIOR FIT V-NECK LADIES' T-SHIRT. 64V00L</option>
-                  <option value="7007" ><b><i>DISCONTINUED</i>  Bella&#174;</b> Ladies' Raglan Fleece Hooded Sweatshirt.  7007</option>
-                  <option value="7017" ><b><i>DISCONTINUED</i>  Bella&#174;</b> Ladies' Fleece Straight Leg Sweatpant.  7017</option>
-                  <option value="711003" ><b>OGIO<SUP>&#174;</b> ALL TERRAIN DUFFEL. 711003</option>
-                  <option value="711007" ><b>OGIO<sup>&#174;</sup></b> HALF DOME DUFFEL. 711007</option>
-                  <option value="711105" ><b>OGIO<sup>&#174;</b> METRO BACKPACK. 711105</option>
-                  <option value="711113" ><b>OGIO<sup>&#174;</b> FUGITIVE BACKPACK. 711113</option>
-                  <option value="711140" ><b>OGIO<sup>&#174;</sup></b> CARBON BACKPACK. 711140</option>
-                  <option value="711207" ><b>OGIO<sup>&#174;</b> CORPORATE CITY MESSENGER. 711207</option>
-                  <option value="8000" ><b>GILDAN<sup>&#174;</sup></b> DRYBLEND&#153; T-SHIRT. 8000</option>
-                  <option value="800B" ><b>GILDAN<sup>&#174;</sup></b> DRYBLEND&#153; YOUTH T-SHIRT.  800B</option>
-                  <option value="82130R" ><b>FRUIT OF THE LOOM<SUP>&#174;</SUP></b> SUPERCOTTON<SUP>TM</SUP> HOODED SWEATSHIRT. 82130R</option>
-                  <option value="82230R" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> SUPERCOTTON&#153; FULL ZIP HOODED SWEATSHIRT. 82230R</option>
-                  <option value="82300R" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> SUPERCOTTON&#153; CREWNECK SWEATSHIRT. 82300R</option>
-                  <option value="8413" ><b>BELLA+CANVAS<sup>&#174;</sup></b> TRIBLEND LADIES' TEE. 8413</option>
-                  <option value="8430" ><b>BELLA+CANVAS<sup>&#174;</sup></b> TRIBLEND RACERBACK LADIES� TANK. 8430</option>
-                  <option value="8435" ><b>BELLA+CANVAS<sup>&#174;</sup></b> TRIBLEND DEEP V-NECK LADIES' TEE. 8435</option>
-                  <option value="8550" ><b><i>DISCONTINUED</i> Pace </b>  1/4 Zip Sweatshirt. 8550</option>
-                  <option value="8600" ><b><i>DISCONTINUED</i> Pace </b> Short Sleeve Henley. 8600</option>
-                  <option value="8700" ><b><i>DISCONTINUED</i> Pace </b> Long Sleeve Henley.  8700</option>
-                  <option value="8701" ><b>BELLA+CANVAS&#153;</b> SHEER RIB LADIES' TEE. 8701</option>
-                  <option value="8705" ><b>BELLA+CANVAS&#153;</b> SHEER RIB DEEP V LADIES' TEE. 8705</option>
-                  <option value="8770" ><b>BELLA+CANVAS<sup>&#174;</sup></b> SHEER RIB RACERBACK LADIES' TANK. 8770</option>
-                  <option value="8780" ><b>BELLA+CANVAS<sup>&#174;</sup></b> SHEER RIB LADIES' TANK. 8780</option>
-                  <option value="8800" ><b><i>DISCONTINUED</i> GILDAN&#174;</b> DRYBLEND&#153; JERSEY SPORT SHIRT. 8800</option>
-                  <option value="8850" ><b>BELLA+CANVAS<sup>&#174;</sup></b> FLOWY LONG SLEEVE OFF SHOULDER LADIES� TEE. 8850</option>
-                  <option value="8900" ><b><i>DISCONTINUED</i> GILDAN&#174;</b> DRYBLEND&#153; POCKETED JERSEY SPORT SHIRT. 8900</option>
-                  <option value="9011" ><b><i>DISCONTINUED</i> King Athletics </b> Double Hooded Sweatshirt.  9011</option>
-                  <option value="9017" ><b><i>DISCONTINUED</i>  King Athletics </b> Full Zip Hooded Sweatshirt.  9017</option>
-                  <option value="92000" ><b>GILDAN<sup>&#174;</sup></b> PREMIUM COTTON RING SPUN FLEECE CREWNECK SWEATSHIRT. 92000</option>
-                  <option value="92500" ><b>GILDAN<SUP>&#174;</SUP></b> PREMIUM COTTON<sup>TM</sup> RING SPUN FLEECE HOODED SWEATSHIRT. 92500</option>
-                  <option value="A100" ><b>ATC&#153;</b> FULL LENGTH APRON WITH POCKETS. A100</option>
-                  <option value="A101" ><b>ATC&#153;</b> WAIST APRON WITH POCKETS. A101</option>
-                  <option value="ATC0820" ><b>ATC&#174;</b> EUROSPUN RING SPUN CONTRAST STITCH SHORT SLEEVE TEE. ATC0820</option>
-                  <option value="ATC0821" ><b>ATC&#174;</b> EUROSPUN RING SPUN CONTRAST STITCH LONG SLEEVE TEE. ATC0821</option>
-                  <option value="ATC0822" ><b>ATC&#174;</b> EUROSPUN RING SPUN BASEBALL TEE. ATC0822</option>
-                  <option value="ATC0822Y" ><b>ATC&#174;</b> EUROSPUN RING SPUN BASEBALL YOUTH TEE. ATC0822Y</option>
-                  <option value="ATC110F" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> ONE TEN SNAPBACK CAP. ATC110F</option>
-                  <option value="ATC110FT" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> ONE TEN SNAPBACK 2-TONE CAP. ATC110FT</option>
-                  <option value="ATC15" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> PERFORMANCE FLATBILL WITH PIPING CAP. ATC15</option>
-                  <option value="ATC16" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> PERFORMANCE COLOUR BLOCK CAP. ATC16</option>
-                  <option value="ATC1601" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> ORIGINAL COLOUR BLOCK CAP. ATC1601</option>
-                  <option value="ATC6199" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> FADE CAP. ATC6199</option>
-                  <option value="ATC6277" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> ORIGINAL CAP. ATC6277</option>
-                  <option value="ATC6477" ><b>ATC<sup>TM</sup>BY FLEXFIT<sup>&#174;</sup></b> WOOL BLEND CAP. ATC6477</option>
-                  <option value="ATC6511" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> MESH BACK CAP. ATC6511</option>
-                  <option value="ATC6533" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> ULTRAFIBRE & AIRMESH CAP. ATC6533</option>
-                  <option value="ATC6997" ><b>ATC<sup>TM</sup> BY FLEXFIT<sup>&#174;</sup></b> GARMENT WASHED CAP. ATC6997</option>
-                  <option value="ATC8000" ><b>ATC&#174;</b> EUROSPUN RING SPUN TEE. ATC8000</option>
-                  <option value="ATC8000L" ><b>ATC&#174;</b> EUROSPUN RING SPUN LADIES� TEE. ATC8000L</option>
-                  <option value="ATC8000Y" ><b>ATC&#174;</b> EUROSPUN RING SPUN YOUTH TEE. ATC8000Y</option>
-                  <option value="ATC8001" ><b>ATC&#174;</b> EUROSPUN RING SPUN V-NECK TEE. ATC8001</option>
-                  <option value="ATC8001L" ><b>ATC&#174;</b> EUROSPUN RING SPUN V-NECK LADIES� TEE. ATC8001L</option>
-                  <option value="ATC8003L" ><b>ATC&#174;</b> EUROSPUN RING SPUN 3/4 SLEEVE LADIES� TEE. ATC8003L</option>
-                  <option value="ATC8004L" ><b>ATC&#174;</b> EUROSPUN RING SPUN LADIES� TANK. ATC8004L</option>
-                  <option value="ATC8015" ><b>ATC&#174;</b> EUROSPUN RING SPUN LONG SLEEVE TEE. ATC8015</option>
-                  <option value="B1010" ><b>ATC&#153;</b> POLYPROPYLENE TOTE. B1010</option>
-                  <option value="B1011" ><b>ATC&#153;</b> POLYPROPYLENE GROCERY TOTE. B1011</option>
-                  <option value="B1012" ><b>ATC&#153;</b> POLYPROPYLENE MINI TOTE. B1012</option>
-                  <option value="B1014" ><b>ATC&#153;</b> POLYPROPYLENE CINCH PACK. B1014</option>
-                  <option value="B1018" ><b>ATC&#153;</b> TWO TONE ESSENTIAL TOTE. B1018</option>
-                  <option value="B1019" ><b>ATC&#153;</b> PANEL TOTE. B1019</option>
-                  <option value="B1020" ><b>ATC&#153;</b> LARGE FELT TOTE. B1020</option>
-                  <option value="B1021" ><b>ATC&#153;</b> MEDIUM FELT TOTE. B1021</option>
-                  <option value="B1022" ><b>ATC&#153;</b> FELT TABLET SLEEVE. B1022</option>
-                  <option value="B1023" ><b>ATC&#153;</b> FELT HOBO TOTE. B1023</option>
-                  <option value="B1027" ><b>ATC&#153;</b> EXCURSION DUFFEL. B1027</option>
-                  <option value="B1028" ><b>ATC&#153;</b> NAILHEAD BACKPACK. B1028</option>
-                  <option value="B1029" ><b>ATC&#153;</b> RETRO BACKPACK. B1029</option>
-                  <option value="B1031" ><b>ATC&#153;</b> NAILHEAD MESSENGER. B1031</option>
-                  <option value="B1032" ><b>ATC&#153;</b> FELT WINE BOTTLE TOTE. B1032</option>
-                  <option value="B1033" ><b><i>NEW!</i> ATC&#153;</b> RETRO BARREL DUFFEL. B1033</option>
-                  <option value="B1034" ><b><i>NEW!</i> ATC&#153;</b> VarCITY DUFFEL. B1034</option>
-                  <option value="B1035" ><b><i>NEW!</i> ATC&#153;</b> VarCITY BACKPACK. B1035</option>
-                  <option value="B1036" ><b><i>NEW!</i> ATC&#153;</b> VarCITY SACK PACK. B1036</option>
-                  <option value="B110" ><b> ATC&#153;</b> ESSENTIAL TOTE. B110</option>
-                  <option value="B120" ><b>ATC&#153;</b> CINCH PACK. B120</option>
-                  <option value="BC8800" ><b>BELLA+CANVAS<sup>&#174;</sup></b> FLOWY RACERBACK LADIES� TANK. BC8800</option>
-                  <option value="C100" ><b>ATC<sup>TM</sup></b> KNIT TOQUE. C100</option>
-                  <option value="C1000" ><b>ATC&#153;</b> DROP NEEDLE KNIT BEANIE. C1000</option>
-                  <option value="C1007" ><b>ATC&#153;</b> ACTIVE KNIT TOQUE. C1007</option>
-                  <option value="C1008" ><b>ATC&#153;</b> INSULATED KNIT TOQUE. C1008</option>
-                  <option value="C1009" ><b>ATC&#153;</b> TOUCHSCREEN FRIENDLY GLOVES. C1009</option>
-                  <option value="C1011" ><b>ATC<sup>TM</sup></b> DOUBLE STRIPE KNIT BEANIE. C1011</option>
-                  <option value="C105" ><b>ATC&#153;</b> KNIT SKULL CAP. C105</option>
-                  <option value="C112" ><b>ATC<sup>TM</sup></b> LONGER LENGTH KNIT BEANIE. C112</option>
-                  <option value="C1201" ><b>ATC<sup>TM</sup></b> WATCH CAP. C1201</option>
-                  <option value="C1202" ><b><i>NEW!</i> ATC<sup>TM</sup></b> STRIPED CUFF POM POM TOQUE. C1202</option>
-                  <option value="C122" ><b><i>DISCONTINUED</i> ATC&#153;</b> CONTRAST DIAMOND INSET TWILL CAP. C122</option>
-                  <option value="C130" ><b>ATC<sup>TM</sup></b> MID PROFILE TWILL CAP. C130</option>
-                  <option value="C1301" ><b>ATC&#153;</b> CANADA TWILL CAP. C1301</option>
-                  <option value="C1304" ><b>ATC<SUP>TM</SUP></b> CONTRAST TIPPED VISOR CAP. C1304</option>
-                  <option value="C131" ><b><i>DISCONTINUED</i> ATC&#153;</b> TWILL VISOR. C131</option>
-                  <option value="C1310" ><b> ATC<sup>TM</sup></b> REFLECTIVE SANDWICH BILL CAP. C1310</option>
-                  <option value="C1312" ><b><i>NEW!</i> ATC<sup>TM</sup></b> REALTREE<sup>&#174;</sup> CAMOUFLAGE CAP. C1312</option>
-                  <option value="C1313" ><b><i>NEW!</i> ATC<sup>TM</sup></b> REALTREE<sup>&#174;</sup> PIGMENT DYED CAMOUFLAGE CAP. C1313</option>
-                  <option value="C1314" ><b><i>NEW!</i> ATC<sup>TM</sup></b> REALTREE<sup>&#174;</sup> CAMOUFLAGE MESH BACK CAP. C1314</option>
-                  <option value="C1315" ><b><i>NEW!</i> ATC&#153;</b> CANADA SWIRL MESH BACK CAP. C1315</option>
-                  <option value="C140" ><b>ATC<SUP>TM</SUP></b> SANDWICH BILL CAP. C140</option>
-                  <option value="C150" ><b>ATC<sup>TM</sup></b> FITTED MID PROFILE CAP. C150</option>
-                  <option value="C160" ><b><i>DISCONTINUED</i> ATC&#153;</b> LOW PROFILE TWILL CAP. C160</option>
-                  <option value="C170" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174; </b> Wicking Mesh Cap. C170</option>
-                  <option value="C180" ><b><i>DISCONTINUED</i> ATC&#153;</b> DISTRESSED MILITARY CAP. C180</option>
-                  <option value="CARABINER" ><b>DRYFRAME<sup>&#174;</sup></b> CARABINER KEYCHAIN. CARABINER</option>
-                  <option value="CGM211" ><b><i>NEW!</i> CALLAWAY</b> CORE PERFORMANCE POLO. CGM211</option>
-                  <option value="CGM401" ><b><i>NEW!</i> CALLAWAY</b> HEATHERED PERFORMANCE POLO. CGM401</option>
-                  <option value="CGM406" ><b><i>NEW!</i> CALLAWAY</b> SIGNATURE PERFORMANCE POLO. CGM406</option>
-                  <option value="CGM450" ><b><i>NEW!</i> CALLAWAY</b> EMBOSSED ATHLETIC POLO. CGM450</option>
-                  <option value="CGM451" ><b><i>NEW!</i> CALLAWAY</b> OPTI-VENT POLO. CGM451</option>
-                  <option value="CGM452" ><b><i>NEW!</i> CALLAWAY</b> TONAL POLO. CGM452</option>
-                  <option value="CGM506" ><b><i>NEW!</i> CALLAWAY</b> VENTILATED POLO. CGM506</option>
-                  <option value="CGW212" ><b><i>NEW!</i> CALLAWAY</b> CORE PERFORMANCE LADIES' POLO. CGW212</option>
-                  <option value="CGW437" ><b><i>NEW!</i> CALLAWAY</b> OPTI-VENT LADIES' POLO. CGW437</option>
-                  <option value="CGW447" ><b><i>NEW!</i> CALLAWAY</b> TONAL LADIES' POLO. CGW447</option>
-                  <option value="CGW511" ><b><i>NEW!</i> CALLAWAY</b> VENTILATED LADIES' POLO. CGW511</option>
-                  <option value="D500" ><b><i>DISCONTINUED</i> Coal Harbour&#174; </b> Short Sleeve Denim Shirt. D500</option>
-                  <option value="D510" ><b>COAL HARBOUR<sup>&#174;</sup></b> EASY CARE SHORT SLEEVE SHIRT. D510</option>
-                  <option value="D515" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> EASY CARE CAMP SHIRT. D515</option>
-                  <option value="D600" ><b><i>DISCONTINUED</i> Coal Harbour&#174; </b> Long Sleeve Denim Shirt. D600</option>
-                  <option value="D6004" ><b>COAL HARBOUR<sup>&#174;</sup></b> TEXTURED WOVEN SHIRT. D6004</option>
-                  <option value="D6005" ><b>COAL HARBOUR<sup>&#174;</sup></b> TATTERSALL CHECK WOVEN SHIRT. D6005</option>
-                  <option value="D6006" ><b>COAL HARBOUR<sup>&#174;</sup></b> MINI STRIPE WOVEN SHIRT. D6006</option>
-                  <option value="D6013" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY LONG SLEEVE WOVEN SHIRT. D6013</option>
-                  <option value="D6017" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> NON-IRON TWILL SHIRT. D6017</option>
-                  <option value="D6020" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> PERFORMANCE WOVEN SHIRT. D6020</option>
-                  <option value="D6021" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY SHORT SLEEVE WOVEN SHIRT. D6021</option>
-                  <option value="D610" ><b>COAL HARBOUR<sup>&#174;</sup></b> EASY CARE LONG SLEEVE SHIRT. D610</option>
-                  <option value="D640" ><b><i>DISCONTINUED</i> Coal Harbour&#174; </b>Oxford.  D640</option>
-                  <option value="D650" ><b><i>DISCONTINUED</i> Coal Harbour&reg; </b> Herringbone Shirt. D650</option>
-                  <option value="DF7633" ><b>DRYFRAME<sup>&#174;<sup></b> THERMO TECH JACKET. DF7633</option>
-                  <option value="DF7633L" ><b>DRYFRAME<sup>&#174;</sup></b> THERMO TECH LADIES' JACKET. DF7633L</option>
-                  <option value="DF7634" ><b>DRYFRAME<sup>&#174;</sup></b> DRY TECH SHELL SYSTEM JACKET. DF7634</option>
-                  <option value="DF7634L" ><b>DRYFRAME<sup>&#174;</sup></b> DRY TECH SHELL SYSTEM LADIES' JACKET. DF7634L</option>
-                  <option value="DF7635" ><b>DRYFRAME<sup>&#174;</sup></b> DRY TECH LINER SYSTEM JACKET. DF7635</option>
-                  <option value="DF7635L" ><b>DRYFRAME<sup>&#174;</sup></b> DRY TECH LINER SYSTEM LADIES' JACKET. DF7635L</option>
-                  <option value="DF7636" ><b>DRYFRAME<sup>&#174;</sup></b> MICRO TECH FLEECE LINED JACKET. DF7636</option>
-                  <option value="DF7636L" ><b>DRYFRAME<sup>&#174;</sup></b> MICRO TECH FLEECE LINED LADIES' JACKET. DF7636L</option>
-                  <option value="DF7651" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> DRY TECH REVERSIBLE LINER JACKET. DF7651</option>
-                  <option value="DF7651L" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> DRY TECH REVERSIBLE LINER LADIES' JACKET. DF7651L</option>
-                  <option value="DF7655" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> DRY TECH FLEECE FULL ZIP HOODED JACKET. DF7655</option>
-                  <option value="DF7655L" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> DRY TECH FLEECE FULL ZIP HOODED LADIES' JACKET. DF7655L</option>
-                  <option value="DF7656" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> DRY TECH FLEECE PULLOVER HOOD. DF7656</option>
-                  <option value="DF7656L" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> DRY TECH FLEECE LADIES' PULLOVER HOOD. DF7656L</option>
-                  <option value="DF7662" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> STRATA TECH SOFT SHELL JACKET. DF7662</option>
-                  <option value="DF7662L" ><b><i>NEW!</i> DRYFRAME<sup>&#174;</sup></b> STRATA TECH SOFT SHELL LADIES' JACKET. DF7662L</option>
-                  <option value="EB222" ><b>EDDIE BAUER<sup>&#174;</sup></b> VERTICAL FLEECE FULL ZIP JACKET. EB222</option>
-                  <option value="EB223" ><b>EDDIE BAUER<sup>&#174;</sup></b> VERTICAL FLEECE FULL ZIP LADIES' JACKET. EB223</option>
-                  <option value="EB224" ><b>EDDIE BAUER<sup>&#174;</sup></b> MICRO FLEECE FULL ZIP JACKET. EB224</option>
-                  <option value="EB225" ><b>EDDIE BAUER<sup>&#174;</sup></b> MICRO FLEECE FULL ZIP LADIES' JACKET. EB225</option>
-                  <option value="EB232" ><b>EDDIE BAUER<sup>&#174;</sup></b> SHERPA FLEECE FULL ZIP JACKET. EB232</option>
-                  <option value="EB233" ><b>EDDIE BAUER<sup>&#174;</sup></b> SHERPA FLEECE FULL ZIP LADIES' JACKET. EB233</option>
-                  <option value="EB530" ><b>EDDIE BAUER<sup>&#174;</b> SOFT SHELL JACKET. EB530</option>
-                  <option value="EB531" ><b>EDDIE BAUER<sup>&#174;</sup></b> SOFT SHELL LADIES' JACKET. EB531</option>
-                  <option value="EB532" ><b>EDDIE BAUER<sup>&#174;</b> SHADED CROSSHATCH SOFT SHELL JACKET. EB532</option>
-                  <option value="EB533" ><b>EDDIE BAUER<sup>&#174;</b> SHADED CROSSHATCH SOFT SHELL LADIES' JACKET. EB533</option>
-                  <option value="EB534" ><b>EDDIE BAUER<sup>&#174;</b> RUGGED RIPSTOP SOFT SHELL JACKET. EB534</option>
-                  <option value="EB535" ><b>EDDIE BAUER<sup>&#174;</b> RUGGED RIPSTOP SOFT SHELL LADIES' JACKET. EB535</option>
-                  <option value="EB536" ><b>EDDIE BAUER<sup>&#174;</sup></b> SOFT SHELL PARKA. EB536</option>
-                  <option value="EB537" ><b>EDDIE BAUER<sup>&#174;</sup></b> SOFT SHELL LADIES' PARKA. EB537</option>
-                  <option value="EB538" ><b>EDDIE BAUER<sup>&#174;</sup></b> WEATHER RESIST SOFT SHELL JACKET. EB538</option>
-                  <option value="EB539" ><b>EDDIE BAUER<sup>&#174;</sup></b> WEATHER RESIST SOFT SHELL LADIES' JACKET. EB539</option>
-                  <option value="F100" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174; </b> Fleece Scarf. F100</option>
-                  <option value="F1001" ><b><i>DISCONTINUED</i> ATC&#153;</b> LONGER LENGTH KNIT SCARF. F1001</option>
-                  <option value="F1002" ><b>ATC&#153;</b> LONGER LENGTH FLEECE SCARF. F1002</option>
-                  <option value="F1010" ><b> ATC&#153;</b> POCKET SCARF. F1010</option>
-                  <option value="F1101" ><b>ATC&#153;</b> FLEECE BLANKET. F1101</option>
-                  <option value="F170" ><b><i>DISCONTINUED</i> Hanes </b> Ultimate Cotton&reg; Hooded Sweatshirt.  F170</option>
-                  <option value="F200" ><b>ATC&#153;</b> PRO FLEECE HOODED SWEATSHIRT. F200</option>
-                  <option value="F2004" ><b><i>NEW!</i> ATC&#153;</b> GAME DAY&#153; FLEECE FULL ZIP HOODED SWEATSHIRT. F2004</option>
-                  <option value="F2005" ><b>ATC&#153;</b> GAME DAY&#153; FLEECE HOODED SWEATSHIRT. F2005</option>
-                  <option value="F2008" ><b>ATC&#153;</b> PRO FLEECE FULL ZIP COLOUR BLOCK HOODED SWEATSHIRT. F2008</option>
-                  <option value="F201" ><b>ATC&#153;</b> PRO FLEECE FULL ZIP HOODED SWEATSHIRT. F201</option>
-                  <option value="F2011" ><b>ATC<sup>TM</sup></b> GAME DAY<sup>TM</sup> FLEECE COLOUR BLOCK HOODED SWEATSHIRT. F2011</option>
-                  <option value="F2015" ><b><i>NEW!</i> ATC&#153;</b> LIFESTYLE FLEECE 1/2 ZIP SWEATSHIRT. F2015</option>
-                  <option value="F2016" ><b><i>NEW!</i> ATC&#174;</b> ES ACTIVE HOODED SWEATSHIRT. F2016</option>
-                  <option value="F2018" ><b><i>NEW!</i> ATC&#174;</b> ES ACTIVE FULL ZIP HOODED SWEATSHIRT. F2018</option>
-                  <option value="F2019" ><b><i>NEW!</i> ATC&#153;</b> ACADEMY FULL ZIP HOODIE. F2019</option>
-                  <option value="F202" ><b>ATC&#153;</b> PRO FLEECE 1/4 ZIP SWEATSHIRT. F202</option>
-                  <option value="F2020" ><b><i>NEW!</i> ATC&#153;</b> ACADEMY PULLOVER HOODIE. F2020</option>
-                  <option value="F2021" ><b><i>NEW!</i> ATC&#153;</b> LIFESTYLE FLEECE FULL ZIP SWEATSHIRT. F2021</option>
-                  <option value="F210" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg;</b>  AllPro Cotton Fleece Track Jacket. F210</option>
-                  <option value="F220" ><b>ATC<SUP>TM</SUP></b> PTECH<sup>&#174;</sup> FLEECE HOODED SWEATSHIRT. F220</option>
-                  <option value="F2201" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE VarCITY HOODED SWEATSHIRT. F2201</option>
-                  <option value="F221" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE HOODED JACKET. F221</option>
-                  <option value="F222" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE TRACK JACKET. F222</option>
-                  <option value="F223" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE PANTS. F223</option>
-                  <option value="F260" ><b><i>DISCONTINUED</i> Hanes </b> Ultimate Cotton&reg; Crewneck Sweatshirt. F260</option>
-                  <option value="F283" ><b><i>DISCONTINUED</i> Hanes </b> Ultimate Cotton&reg; Full Zip Hooded Sweatshirt.  F283</option>
-                  <option value="G221" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE HOODED GIRLS' JACKET. G221</option>
-                  <option value="HD6BY" ><b>FRUIT OF THE LOOM<SUP>&#174;</SUP></b> LOFTEEZ HD<SUP>&#174;</SUP> YOUTH T-SHIRT. HD6BY</option>
-                  <option value="HD6LR" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> LOFTEEZ HD<sup>&#174;</sup> LONG SLEEVE T-SHIRT. HD6LR</option>
-                  <option value="HD6R" ><b>FRUIT OF THE LOOM<SUP>&#174;</SUP></b> LOFTEEZ HD<SUP>&#174;</SUP> T-SHIRT. HD6R</option>
-                  <option value="J0760" ><b>COAL HARBOUR<sup>&#174;</sup></b> PREMIER SOFT SHELL JACKET. J0760</option>
-                  <option value="J0763" ><b>COAL HARBOUR<sup>&#174;</sup></b> PREMIER INSULATED SOFT SHELL JACKET. J0763</option>
-                  <option value="J740" ><b>COAL HARBOUR<sup>&#174;</sup></b> POLAR FLEECE VEST. J740</option>
-                  <option value="J750" ><b>COAL HARBOUR<sup>&#174;</sup></b> POLAR FLEECE JACKET. J750</option>
-                  <option value="J7501" ><b>COAL HARBOUR<sup>&#174;</sup></b> CITY FLEECE JACKET. J7501</option>
-                  <option value="J7502" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY FLEECE JACKET. J7502</option>
-                  <option value="J7503" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY FLEECE COLOUR BLOCK JACKET. J7503</option>
-                  <option value="J756" ><b><i>DISCONTINUED</i> Coal Harbour&reg;</b> Fleece Lined Ripstop Jacket. J756</option>
-                  <option value="J757" ><b><i>DISCONTINUED</i> Coal Harbour&#174; </b> Micro Fleece 1/4 Zip. J757</option>
-                  <option value="J760" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> SOFT SHELL JACKET. J760</option>
-                  <option value="J7603" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY SOFT SHELL JACKET. J7603</option>
-                  <option value="J7604" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY COLOUR BLOCK SOFT SHELL JACKET. J7604</option>
-                  <option value="J7605" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> ESSENTIAL HOODED SOFT SHELL JACKET. J7605</option>
-                  <option value="J763" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> INSULATED SOFT SHELL JACKET. J763</option>
-                  <option value="J7637" ><b>COAL HARBOUR<sup>&#174;</sup></b> ALL SEASON MESH LINED JACKET. J7637</option>
-                  <option value="J7650" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> 24 SEVEN JACKET. J7650</option>
-                  <option value="J7652" ><b><i>NEW!!</i> COAL HARBOUR<sup>&#174;</sup></b> URBAN JACKET. J7652</option>
-                  <option value="J7658" ><b><i>NEW!</i> ATC&#153;</b> VarCITY TEAM JACKET. J7658</option>
-                  <option value="J7659" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> SWEATER FLEECE JACKET. J7659</option>
-                  <option value="J766" ><b><i>DISCONTINUED</i> COAL HARBOUR<sup>&#174;</sup></b> HOODED SOFT SHELL JACKET. J766</option>
-                  <option value="J780" ><b>ATC<sup>TM</sup></b> PRO TEAM JACKET. J780</option>
-                  <option value="J792" ><b><i>DISCONTINUED</i> Coal Harbour&reg;</b> Reversible Ripstop Vest. J792</option>
-                  <option value="JT22" ><b>RED KAP<sup>&#174;</sup></b> SLASH POCKET JACKET. JT22</option>
-                  <option value="KOI8021" ><b><i>NEW!</i> KOI<sup>&#174;</sup></b> TRIBLEND TEE. KOI8021</option>
-                  <option value="KOI8022L" ><b><i>NEW!</i> KOI<sup>&#174;</sup></b> TRIBLEND V-NECK LADIES' TEE. KOI8022L</option>
-                  <option value="L0760" ><b>COAL HARBOUR<sup>&#174;</sup></b> PREMIER SOFT SHELL LADIES' JACKET. L0760</option>
-                  <option value="L2002" ><b>ATC&#153;</b> PRO FLEECE FUNNEL NECK HOODED LADIES� SWEATSHIRT. L2002</option>
-                  <option value="L2004" ><b><i>NEW!</i> ATC&#153;</b> GAME DAY&#153; FLEECE FULL ZIP HOODED LADIES' SWEATSHIRT. L2004</option>
-                  <option value="L2005" ><b>ATC&#153;</b> GAME DAY&#153; FLEECE HOODED LADIES' SWEATSHIRT. L2005</option>
-                  <option value="L201" ><b>ATC&#153;</b> PRO FLEECE FULL ZIP HOODED LADIES' SWEATSHIRT. L201</option>
-                  <option value="L2015" ><b><i>NEW!</i> ATC&#153;</b> LIFESTYLE FLEECE 1/2 ZIP SWEATSHIRT. L2015</option>
-                  <option value="L2021" ><b><i>NEW!</i> ATC&#153;</b> LIFESTYLE FLEECE FULL ZIP LADIES' SWEATSHIRT. L2021</option>
-                  <option value="L210" ><b><i>DISCONTINUED</i> ATC&#153;</b> ALLPRO COTTON FLEECE LADIES' TRACK JACKET. L210</option>
-                  <option value="L211" ><b><i>DISCONTINUED</i> ATC&#153;</b> ALLPRO COTTON FLEECE FULL ZIP HOODED LADIES' SWEATSHIRT. L211</option>
-                  <option value="L212" ><b><i>DISCONTINUED</i> ATC&#153;</b> ALLPRO COTTON FLEECE LADIES' PANTS. L212</option>
-                  <option value="L221" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE HOODED LADIES' JACKET. L221</option>
-                  <option value="L223" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE LADIES' PANTS. L223</option>
-                  <option value="L350" ><b>ATC&#153;</b> PRO TEAM SHORT SLEEVE LADIES' TEE. L350</option>
-                  <option value="L3510" ><b><i>DISCONTINUED</i> ATC&#153;</b> A-GAME&#153; COLOUR BLOCK LADIES' V-NECK TEE. L3510</option>
-                  <option value="L3517" ><b>ATC&#153;</b> PRO TEAM ProFORMANCE V-NECK LADIES' TEE. L3517</option>
-                  <option value="L3518" ><b>ATC&#153;</b> PRO TEAM ProFORMANCE LADIES' SPORT SHIRT. L3518</option>
-                  <option value="L3519" ><b>ATC&#153;</b> PRO TEAM HOME & AWAY LADIES� JERSEY. L3519</option>
-                  <option value="L3520" ><b>ATC&#153;</b> PRO TEAM SHORT SLEEVE V-NECK LADIES� TEE. L3520</option>
-                  <option value="L3520LS" ><b>ATC&#153;</b> PRO TEAM V-NECK LONG SLEEVE LADIES� TEE. L3520LS</option>
-                  <option value="L3527" ><b>ATC&#153;</b> PRO TEAM SLEEVELESS V-NECK LADIES' TEE. L3527</option>
-                  <option value="L3531" ><b><i>NEW!</i> ATC&#153;</b> PRO TEAM ProFORMANCE COLOUR BLOCK LADIES' SPORT SHIRT. L3531</option>
-                  <option value="L3930R" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> HD COTTON&#153; LADIES' T-SHIRT. L3930R</option>
-                  <option value="L39VR" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> HD COTTON&#153;  V-NECK LADIES' T-SHIRT. L39VR</option>
-                  <option value="L400" ><b>COAL HARBOUR<sup>&#174;</sup></b> CLASSIC PIQUE LADIES' SPORT SHIRT. L400</option>
-                  <option value="L4001" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT COLOUR BLOCK LADIES' SPORT SHIRT. L4001</option>
-                  <option value="L4002" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT CONTRAST INSET LADIES' SPORT SHIRT. L4002</option>
-                  <option value="L4005" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG PROOF POWER LADIES' SPORT SHIRT. L4005</option>
-                  <option value="L4006" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT CONTRAST STITCH LADIES� SPORT SHIRT. L4006</option>
-                  <option value="L4007" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY LADIES� SPORT SHIRT. L4007</option>
-                  <option value="L4008" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY COLOUR BLOCK LADIES� SPORT SHIRT. L4008</option>
-                  <option value="L4011" ><b>COAL HARBOUR<sup>&#174;</sup></b> C-SPUN PIQUE LADIES' SPORT SHIRT. L4011</option>
-                  <option value="L4015" ><b>COAL HARBOUR<sup>&#174;</sup></b> CITY TECH LADIES' SPORT SHIRT. L4015</option>
-                  <option value="L4022" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> COMFORT PIQUE SOIL RELEASE LADIES' SPORT SHIRT. L4022</option>
-                  <option value="L4023" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> COTTON SELECT SOIL RELEASE LADIES' SPORT SHIRT. L4023</option>
-                  <option value="L4024" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY COLOUR SLICE LADIES' SPORT SHIRT. L4024</option>
-                  <option value="L410" ><b><i>DISCONTINUED</i> Coal Harbour&reg;</b> Ladies' Pima Pique Sport Shirt. L410</option>
-                  <option value="L430" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> SILK TOUCH LADIES' SPORT SHIRT. L430</option>
-                  <option value="L439" ><b><i>DISCONTINUED</i> Coal Harbour&reg; </b> Ladies' Mesh Wicking Sport Shirt. L439</option>
-                  <option value="L440" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> FINE JACQUARD LADIES' SPORT SHIRT. L440</option>
-                  <option value="L445" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT LADIES' SPORT SHIRT. L445</option>
-                  <option value="L4451" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT SLEEVELESS LADIES' SPORT SHIRT. L4451</option>
-                  <option value="L450" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> DOUBLE-MESH LADIES' SPORT SHIRT. L450</option>
-                  <option value="L451" ><b><i>DISCONTINUED</i> ATC&#153;</b> DOUBLE-MESH LADIES' V-NECK TEE. L451</option>
-                  <option value="L453" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174; </b> Double-Mesh Wicking Colour Block Tank Top. L453</option>
-                  <option value="L470" ><b>COAL HARBOUR<sup>&#174;</sup></b> PRISM LADIES' SPORT SHIRT. L470</option>
-                  <option value="L510" ><b>COAL HARBOUR<sup>&#174;</sup></b> EASY CARE SHORT SLEEVE LADIES' SHIRT. L510</option>
-                  <option value="L6004" ><b>COAL HARBOUR<sup>&#174;M</sup></b> TEXTURED LADIES' WOVEN SHIRT. L6004</option>
-                  <option value="L6005" ><b>COAL HARBOUR<sup>&#174;</sup></b> TATTERSALL CHECK WOVEN LADIES' SHIRT. L6005</option>
-                  <option value="L6006" ><b>COAL HARBOUR<sup>&#174;</sup></b> MINI STRIPE LADIES' WOVEN SHIRT. L6006</option>
-                  <option value="L6013" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY LONG SLEEVE LADIES' WOVEN SHIRT. L6013</option>
-                  <option value="L6017" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> NON-IRON TWILL LADIES' SHIRT. L6017</option>
-                  <option value="L6020" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> PERFORMANCE LADIES' WOVEN SHIRT. L6020</option>
-                  <option value="L6021" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY SHORT SLEEVE LADIES' WOVEN SHIRT. L6021</option>
-                  <option value="L610" ><b>COAL HARBOUR<sup>&#174;</sup></b> EASY CARE LONG SLEEVE LADIES' SHIRT. L610</option>
-                  <option value="L615" ><b>COAL HARBOUR<sup>&#174;</sup></b> EASY CARE 3/4 SLEEVE WOVEN LADIES' SHIRT. L615</option>
-                  <option value="L640" ><b><i>DISCONTINUED</i> Coal Harbour&#174; </b> Ladies' Oxford. L640</option>
-                  <option value="L740" ><b>COAL HARBOUR<sup>&#174;</sup></b> POLAR FLEECE LADIES' VEST. L740</option>
-                  <option value="L750" ><b>COAL HARBOUR<sup>&#174;</sup></b> POLAR FLEECE LADIES' JACKET.  L750</option>
-                  <option value="L7501" ><b>COAL HARBOUR<sup>&#174;</sup></b> CITY FLEECE LADIES' JACKET. L7501</option>
-                  <option value="L7502" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY FLEECE LADIES' JACKET. L7502</option>
-                  <option value="L7503" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY FLEECE LADIES' COLOUR BLOCK JACKET. L7503</option>
-                  <option value="L757" ><b><i>DISCONTINUED</i> Coal Harbour&#174; </b> Ladies' Micro Fleece 1/4 Zip. L757</option>
-                  <option value="L760" ><b><i>DISCONTINUED</i> COAL HARBOUR<sup>&#174;</sup></b> SOFT SHELL LADIES' JACKET. L760</option>
-                  <option value="L7603" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY SOFT SHELL LADIES' JACKET. L7603</option>
-                  <option value="L7604" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY COLOUR BLOCK SOFT SHELL LADIES' JACKET. L7604</option>
-                  <option value="L7605" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> ESSENTIAL HOODED SOFT SHELL LADIES' JACKET. L7605</option>
-                  <option value="L7637" ><b>COAL HARBOUR<sup>&#174;</sup></b> ALL SEASON MESH LINED LADIES' JACKET. L7637</option>
-                  <option value="L7641" ><b>COAL HARBOUR<sup>&#174;</sup></b> KASEY LADIES� JACKET. L7641</option>
-                  <option value="L7652" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> URBAN LADIES� TRENCH. L7652</option>
-                  <option value="L7659" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> SWEATER FLEECE LADIES' JACKET. L7659</option>
-                  <option value="L766" ><b><i>DISCONTINUED</i> COAL HARBOUR<sup>&#174;</sup></b> HOODED SOFT SHELL LADIES' JACKET. L766</option>
-                  <option value="L780" ><b>ATC<sup>TM</sup></b> PRO TEAM LADIES' JACKET. L780</option>
-                  <option value="LOE320" ><b>OGIO<sup>&#174;</sup></b> ENDURANCE PULSE LADIES� V-NECK. LOE320</option>
-                  <option value="LOE330" ><b>OGIO<SUP>&#174</SUP></b> ENDURANCE NEXUS LADIES� V-NECK. LOE330</option>
-                  <option value="LOE700" ><b>OGIO<sup>&#174;</sup></b> ENDURANCE FULCRUM LADIES FULL ZIP. LOE700</option>
-                  <option value="LOG101" ><b>OGIO<sup>&#174;</sup></b> JEWEL LADIES' POLO. LOG101</option>
-                  <option value="LOG105" ><b><i>DISCONTINUED</i> OGIO&#174;</b> GLAM LADIES' POLO. LOG105</option>
-                  <option value="LOG111" ><b>OGIO<sup>&#174;</sup></b> CRUSH LADIES' HENLEY. LOG111</option>
-                  <option value="LOG112" ><b>OGIO<sup>&#174;</sup></b> VAMP LADIES' POLO. LOG112</option>
-                  <option value="LOG1141" ><b>OGIO<sup>&#174;</sup></b> GAZE LINEAR LADIES� HENLEY. LOG1141</option>
-                  <option value="LOG115" ><b>OGIO<sup>&#174;</sup></b> PEARL LADIES� POLO. LOG115</option>
-                  <option value="LOG119" ><b>OGIO<sup>&#174;</sup></b> MICROSTRIPE LADIES' POLO. LOG119</option>
-                  <option value="LOG125" ><b>OGIO<sup>&#174;</sup></b> FRAMEWORK LADIES� POLO. LOG125</option>
-                  <option value="LOG201" ><b>OGIO<sup>&#174;</sup></b> MINX LADIES' JACKET. LOG201</option>
-                  <option value="LOG500" ><b>OGIO<sup>&#174;</sup></b> BOMBSHELL LADIES' JACKET. LOG500</option>
-                  <option value="LOG505" ><b>OGIO<sup>&#174;</sup></b> QUARRY LADIES� TRENCH. LOG505</option>
-                  <option value="LT100" ><b><i>DISCONTINUED</i> ATC&#153;</b> ACTIVE COTTON LADIES' CREW. LT100</option>
-                  <option value="LT101" ><b><i>DISCONTINUED</i> ATC&#153;</b> ACTIVE COTTON LADIES' V-NECK. LT101</option>
-                  <option value="LT102" ><b><i>DISCONTINUED</i> ATC&#153;</b> ACTIVE COTTON LADIES' TANK. LT102</option>
-                  <option value="LT103" ><b><i>DISCONTINUED</i> ATC&#153;</b> ACTIVE COTTON LADIES' SWEETHEART TEE. LT103</option>
-                  <option value="NE100" ><b><i>DISCONTINUED</i> New Era&reg; </b> Structured Stretch Cotton Cap. NE100</option>
-                  <option value="NE1000" ><b>NEW ERA<sup>&#174;</b> STRUCTURED STRETCH COTTON CAP. NE1000</option>
-                  <option value="NE102" ><b><i>DISCONTINUED</i> New Era&reg; </b> Stretch Mesh Cap. NE102</option>
-                  <option value="NE1020" ><b>NEW ERA<sup>&#174;</b> STRETCH MESH CAP. NE1020</option>
-                  <option value="NE103" ><b><i>DISCONTINUED</i> New Era&reg; </b> Performance Stretch Acrylic Structured Cap. NE103</option>
-                  <option value="NE1030" ><b><i>DISCONTINUED</i> NEW ERA&#174;</b> PERFORMANCE STRETCH ACRYLIC STRUCTURED CAP. NE1030</option>
-                  <option value="NE1050" ><b><i>DISCONTINUED</i> NEW ERA&#174;</b> CONTRAST PIPED BP PERFORMANCE CAP. NE1050</option>
-                  <option value="NE1070" ><b>NEW ERA<sup>&#174;</b> DRY MESH HEX CAP. NE1070</option>
-                  <option value="NE1080" ><b>NEW ERA<sup>&#174;</b> VINTAGE MESH CAP. NE1080</option>
-                  <option value="NE112" ><b><i>DISCONTINUED</i> New Era&reg; </b> Stretch Mesh Contrast Stitch Cap. NE112</option>
-                  <option value="NE1120" ><b>NEW ERA<sup>&#174;</b> STRETCH MESH CONTRAST STITCH CAP. NE1120</option>
-                  <option value="NE1800" ><b>NEW ERA<sup>&#174;</b> CONTRAST STITCH SIDELINE CAP. NE1800</option>
-                  <option value="NE200" ><b>NEW ERA<sup>&#174;</b> ADJUSTABLE STRUCTURED CAP. NE200</option>
-                  <option value="NE201" ><b><i>DISCONTINUED</i> NEW ERA&#174;</b> ADJUSTABLE UNSTRUCTURED CAP. NE201</option>
-                  <option value="NE205" ><b>NEW ERA<sup>&#174;</b> SNAPBACK TRUCKER CAP.NE205</option>
-                  <option value="NE206" ><b>NEW ERA<sup>&#174;</b> MELTON HEATHER CAP. NE206</option>
-                  <option value="NE302" ><b>NEW ERA<sup>&#174;</b> STRETCH MESH YOUTH CAP. NE302</option>
-                  <option value="NE400" ><b>NEW ERA<sup>&#174;</b> FLAT BILL SNAPBACK CAP. NE400</option>
-                  <option value="NE401" ><b><i>DISCONTINUED</i> NEW ERA&#174;</b> FLAT BILL STRETCH FIT CAP. NE401</option>
-                  <option value="NE4800" ><b>NEW ERA<sup>&#174;</b> FLAT BILL SNAPBACK COLOUR BLOCK CAP. NE4800</option>
-                  <option value="NE700" ><b>NEW ERA<sup>&#174;</b> GRIDIRON TRAINING CAP. NE700</option>
-                  <option value="NE900" ><b>NEW ERA<SUP>&#174;</b> FLEECE LINED SKULL BEANIE. NE900</option>
-                  <option value="NE901" ><b>NEW ERA<sup>&#174;</b> POM POM TOQUE. NE901</option>
-                  <option value="NE903" ><b><i>NEW!</i> NEW ERA<sup>&#174;</sup></b> RIBBED TAILGATE BEANIE. NE903</option>
-                  <option value="OE320" ><b>OGIO<SUP>&#174;</SUP></b> ENDURANCE PULSE CREW. OE320</option>
-                  <option value="OE330" ><b>OGIO<SUP>&#174;</SUP></b> ENDURANCE NEXUS CREW. OE330</option>
-                  <option value="OE335" ><b>OGIO<sup>&#174;</sup></b> ENDURANCE NEXUS 1/4 ZIP. OE335</option>
-                  <option value="OE650" ><b>OGIO<sup>&#174;</sup></b>  ENDURANCE APEX CAP. OE650</option>
-                  <option value="OE700" ><b>OGIO<sup>&#174;</sup></b> ENDURANCE FULCRUM FULL ZIP. OE700</option>
-                  <option value="OG101" ><b>OGIO<sup>&#174;</sup></b> CALIBER 2.0 POLO. OG101</option>
-                  <option value="OG102" ><b><i>DISCONTINUED</i> OGIO&#174;</b> ACCELERATOR POLO. OG102</option>
-                  <option value="OG103" ><b><i>DISCONTINUED</i> OGIO&#174;</b> HANDLEBAR POLO. OG103</option>
-                  <option value="OG104" ><b><i>DISCONTINUED</i> OGIO&#174;</b> RIVET POLO. OG104</option>
-                  <option value="OG107" ><b><i>DISCONTINUED</i> OGIO&#174;</b> O-BOY POLO. OG107</option>
-                  <option value="OG108" ><b><i>DISCONTINUED</i> OGIO&reg;</b>  Sidebar Polo. OG108</option>
-                  <option value="OG109" ><b>OGIO<sup>&#174;</sup></b> HYBRID POLO. OG109</option>
-                  <option value="OG110" ><b>OGIO<sup>&#174;</sup></b> OPTIC POLO. OG110</option>
-                  <option value="OG113" ><b>OGIO<sup>&#174;</sup></b> AXLE POLO. OG113</option>
-                  <option value="OG119" ><b>OGIO<sup>&#174;</sup></b> MICROSTRIPE POLO. OG119</option>
-                  <option value="OG125" ><b>OGIO<sup>&#174;</sup></b> FRAMEWORK POLO. OG125</option>
-                  <option value="OG1301" ><b>OGIO<sup>&#174;</sup></b> GAZE LINEAR POLO. OG1301</option>
-                  <option value="OG201" ><b>OGIO<sup>&#174;</sup></b> TORQUE PULLOVER. OG201</option>
-                  <option value="OG500" ><b>OGIO<sup>&#174;</sup></b> OUTLAW JACKET. OG500</option>
-                  <option value="OG505" ><b>OGIO<sup>&#174;</b> QUARRY JACKET. OG505</option>
-                  <option value="OG600" ><p>OGIO<sup>&#174;</sup></b> X-OVER CAP. OG600</option>
-                  <option value="P160" ><b><i>DISCONTINUED</i> Hanes </b>ComfortBlend&reg; 50/50 Crewneck Sweatshirt. P160</option>
-                  <option value="P170" ><b><i>DISCONTINUED</i> Hanes </b> ComfortBlend&reg; 50/50 Hooded Sweatshirt. P170</option>
-                  <option value="P360" ><b><i>DISCONTINUED</i> Hanes </b> ComfortBlend&reg; 50/50 Youth Crewneck Sweatshirt. P360</option>
-                  <option value="P453" ><b><i>DISCONTINUED</i> Hanes </b> Youth ComfortBlend&reg; 50/50 Sweatpants.  P453</option>
-                  <option value="P473" ><b><i>DISCONTINUED</i> Hanes </b> ComfortBlend&reg; 50/50 Youth Hooded Sweatshirt.  P473</option>
-                  <option value="P483" ><b><i>DISCONTINUED</i> Hanes </b> Comfortblend&reg; 50/50 Youth Full Zip Hooded Sweatshirt. P483</option>
-                  <option value="P650" ><b><i>DISCONTINUED</i> Hanes </b>ComfortBlend&reg; 50/50 Sweatpants. P650</option>
-                  <option value="PT20" ><b>RED KAP<sup>&#174;</sup></b> DURA-KAP<sup>&#174</sup> INDUSTRIAL PANTS. PT20</option>
-                  <option value="PT88" ><b>RED KAP<sup>&#174;</sup></b> INDUSTRIAL CARGO PANTS. PT88</option>
-                  <option value="Rack" >Coal Harbour Rack</option>
-                  <option value="S350" ><b>ATC<sup>TM</sup></b> PRO TEAM SHORT SLEEVE TEE. S350</option>
-                  <option value="S350LS" ><b>ATC&#153;</b> PRO TEAM LONG SLEEVE TEE. S350LS</option>
-                  <option value="S3510" ><b><i>DISCONTINUED</i> ATC&#153;</b> A-GAME&#153; COLOUR BLOCK T-SHIRT. S3510</option>
-                  <option value="S3511" ><b><i>DISCONTINUED</i> ATC&#153;</b> A-GAME&#153; COLOUR BLOCK SHORTS. S3511</option>
-                  <option value="S3512" ><b><i>DISCONTINUED</i> ATC&#153;</b> A-GAME&#153; COLOUR BLOCK SPORT SHIRT. S3512</option>
-                  <option value="S3517" ><b>ATC&#153;</b> PRO TEAM ProFORMANCE TEE. S3517</option>
-                  <option value="S3518" ><b>ATC&#153;</b> PRO TEAM ProFORMANCE SPORT SHIRT. S3518</option>
-                  <option value="S3519" ><b>ATC&#153;</b> PRO TEAM HOME & AWAY JERSEY. S3519</option>
-                  <option value="S3524" ><b>ATC&#153;</b> PRO MESH REVERSIBLE TANK TOP. S3524</option>
-                  <option value="S3525" ><b>ATC&#153;</b> PRO MESH SHORTS. S3525</option>
-                  <option value="S3526" ><b>ATC&#153;</b> PRO TEAM BASEBALL JERSEY. S3526</option>
-                  <option value="S3527" ><b>ATC<sup>TM</sup></b> PRO TEAM SLEEVELESS TEE. S3527</option>
-                  <option value="S3531" ><b> ATC&#153;</b> PRO TEAM ProFORMANCE COLOUR BLOCK SPORT SHIRT. S3531</option>
-                  <option value="S3533" ><b><i>NEW!</i> ATC&#153;</b> PRO TEAM LONG SLEEVE HOODED TEE. S3533</option>
-                  <option value="S355" ><b>ATC&#153;</b> PRO TEAM SHORTS. S355</option>
-                  <option value="S400" ><b>COAL HARBOUR<sup>&#174;</sup></b> CLASSIC PIQUE SPORT SHIRT. S400</option>
-                  <option value="S4001" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT COLOUR BLOCK SPORT SHIRT. S4001</option>
-                  <option value="S4002" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT CONTRAST INSET SPORT SHIRT. S4002</option>
-                  <option value="S4005" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG PROOF POWER SPORT SHIRT. S4005</option>
-                  <option value="S4005P" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG PROOF POWER POCKET SPORT SHIRT. S4005P</option>
-                  <option value="S4006" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT CONTRAST STITCH SPORT SHIRT. S4006</option>
-                  <option value="S4007" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY SPORT SHIRT. S4007</option>
-                  <option value="S4008" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY COLOUR BLOCK SPORT SHIRT. S4008</option>
-                  <option value="S4011" ><b>COAL HARBOUR<sup>&#174;</sup></b> C-SPUN PIQUE SPORT SHIRT. S4011</option>
-                  <option value="S4015" ><b>COAL HARBOUR<sup>&#174;</sup></b> CITY TECH SPORT SHIRT. S4015</option>
-                  <option value="S4016" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG PROOF POWER TACTICAL SPORT SHIRT. S4016</option>
-                  <option value="S4017" ><b> COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT CREW SPORT SHIRT. S4017</option>
-                  <option value="S4018" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT TIPPED COLLAR SPORT SHIRT. S4018</option>
-                  <option value="S4022" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> COMFORT PIQUE SOIL RELEASE SPORT SHIRT. S4022</option>
-                  <option value="S4023" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> COTTON SELECT SOIL RELEASE SPORT SHIRT. S4023</option>
-                  <option value="S4024" ><b><i>NEW!</i> COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY COLOUR SLICE SPORT SHIRT. S4024</option>
-                  <option value="S410" ><b><i>DISCONTINUED</i> Coal Harbour&reg; </b> Pima Pique Sport Shirt. S410</option>
-                  <option value="S430" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> SILK TOUCH SPORT SHIRT. S430</option>
-                  <option value="S431" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> SILK TOUCH SPORT SHIRT. S431</option>
-                  <option value="S439" ><b><i>DISCONTINUED</i> Coal Harbour&reg; </b> Men's Mesh Wicking Sport Shirt. S439</option>
-                  <option value="S440" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> FINE JACQUARD SPORT SHIRT. S440</option>
-                  <option value="S445" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT SPORT SHIRT. S445</option>
-                  <option value="S445LS" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT LONG SLEEVE SPORT SHIRT. S445LS</option>
-                  <option value="S450" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> DOUBLE-MESH SPORT SHIRT. S450</option>
-                  <option value="S451" ><b><i>DISCONTINUED</i> ATC&#153;</b> DOUBLE-MESH SHORT SLEEVE TEE. S451</option>
-                  <option value="S452" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg; </b> Double-Mesh Wicking Long Sleeve Tee. S452</option>
-                  <option value="S454" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174; </b> Double-Mesh Colour Block Tee. S454</option>
-                  <option value="S458" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg;</b> Reversible Mesh Wicking Tank Top. S458</option>
-                  <option value="S459" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg; </b> Wicking Mesh Shorts. S459</option>
-                  <option value="S460" ><b><i>DISCONTINUED</i> Coal Harbour&reg; </b> Textured Wicking Sport Shirt. S460</option>
-                  <option value="S470" ><b>COAL HARBOUR<sup>&#174;</sup></b> PRISM SPORT SHIRT. S470</option>
-                  <option value="S800" ><b><i>DISCONTINUED</i> Coal Harbour&#174; </b> Premium Turtleneck. S800</option>
-                  <option value="S810" ><b><i>DISCONTINUED</i> Coal Harbour&reg;</b> Premium Mock Turtleneck. S810</option>
-                  <option value="S820" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg;</b> SHORT SLEEVE CONTRAST STITCH TEE. S820</option>
-                  <option value="S821" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174;</b> LONG SLEEVE CONTRAST STITCH TEE. S821</option>
-                  <option value="S822" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg; </b> BASEBALL TEE. S822</option>
-                  <option value="SF72R" ><b>FRUIT OF THE LOOM<SUP>&#174;</SUP></b> SOFSPUN<SUP>&#174;</SUP> SWEATSHIRT. SF72R</option>
-                  <option value="SF73R" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> SOFSPUN<sup>&#174;</sup> FULL ZIP HOODED SWEATSHIRT. SF73R</option>
-                  <option value="SF74R" ><b>FRUIT OF THE LOOM<sup>&#174;</sup></b> SOFSPUN<sup>&#174;</sup> FLEECE PANTS. SF74R</option>
-                  <option value="SF76R" ><b>FRUIT OF THE LOOM<SUP>&#174;</SUP></b> SOFSPUN<SUP>&#174;</SUP> HOODED SWEATSHIRT. SF76R</option>
-                  <option value="SHIPCINCH" ><b>ATC&#153;</b>SHIPPING CINCH BAG. SHIPCINCH</option>
-                  <option value="SP14" ><b>RED KAP<sup>&#174;</sup></b> INDUSTRIAL LONG SLEEVE WORK SHIRT. SP14</option>
-                  <option value="SP24" ><b>RED KAP<sup>&#174;</sup></b> INDUSTRIAL SHORT SLEEVE WORK SHIRT. SP24</option>
-                  <option value="SY20" ><b>RED KAP<sup>&#174;</sup></b> SHORT SLEEVE WOVEN CREW SHIRT. SY20</option>
-                  <option value="T100" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174; </b> Grommeted Finger Tip Towel. T100</option>
-                  <option value="TJ7603" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY SOFT SHELL TALL JACKET. TJ7603</option>
-                  <option value="TS445" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT TALL SPORT SHIRT. TS445</option>
-                  <option value="Y0763" ><b>COAL HARBOUR<sup>&#174;</sup></b> PREMIER INSULATED SOFT SHELL YOUTH JACKET. Y0763</option>
-                  <option value="Y130" ><b>ATC&#153;</b> MID PROFILE TWILL YOUTH CAP. Y130</option>
-                  <option value="Y2005" ><b> ATC&#153;</b> GAME DAY&#153; FLEECE HOODED YOUTH SWEATSHIRT. Y2005</option>
-                  <option value="Y2011" ><b>ATC&#153;</b> GAME DAY&#153; FLEECE COLOUR BLOCK HOODED YOUTH SWEATSHIRT. Y2011</option>
-                  <option value="Y2016" ><b><i>NEW!</i> ATC&#174;</b> ES ACTIVE HOODED YOUTH SWEATSHIRT. Y2016</option>
-                  <option value="Y220" ><b>ATC<sup>TM</sup></b> PTECH<sup>&#174;</SUP></b> FLEECE HOODED YOUTH SWEATSHIRT. Y220</option>
-                  <option value="Y2201" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE VarCITY HOODED YOUTH SWEATSHIRT. Y2201</option>
-                  <option value="Y224" ><b>ATC&#153;</b> PTECH<sup>&#174;</sup> FLEECE YOUTH PANTS. Y224</option>
-                  <option value="Y350" ><b>ATC<sup>TM</sup></b> PRO TEAM YOUTH TEE. Y350</option>
-                  <option value="Y350LS" ><b>ATC<sup>TM</sup></b> PRO TEAM LONG SLEEVE YOUTH TEE. Y350LS</option>
-                  <option value="Y3510" ><b>THE AUTHENTIC T-SHIRT COMPANY&#174;</b> A-GAME WICKING YOUTH TEE. Y3510</option>
-                  <option value="Y3511" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174;</b> A-Game Youth Short. Y3511</option>
-                  <option value="Y3519" ><b>ATC&#153;</b> PRO TEAM HOME & AWAY YOUTH JERSEY. Y3519</option>
-                  <option value="Y3524" ><b>ATC&#153;</b> PRO MESH REVERSIBLE YOUTH TANK TOP. Y3524</option>
-                  <option value="Y3525" ><b>ATC&#153;</b> PRO MESH YOUTH SHORTS. Y3525</option>
-                  <option value="Y3526" ><b>ATC&#153;</b> PRO TEAM BASEBALL YOUTH JERSEY. Y3526</option>
-                  <option value="Y355" ><b>ATC<sup>TM</sup></b>  PRO TEAM YOUTH SHORTS. Y355</option>
-                  <option value="Y430" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> SILK TOUCH YOUTH SPORT SHIRT. Y430</option>
-                  <option value="Y445" ><b>COAL HARBOUR<sup>&#174;</sup></b> SNAG RESISTANT YOUTH SPORT SHIRT. Y445</option>
-                  <option value="Y451" ><B><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg;</B> Youth Double-Mesh Wicking Crewneck Tee.  Y451</option>
-                  <option value="Y452" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&#174;</b>  Youth Double-Mesh Wicking Long Sleeve Tee. Y452</option>
-                  <option value="Y458" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg;</b> Youth Reversible Mesh Wicking Tank Top. Y458</option>
-                  <option value="Y459" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg; </b> Youth Wicking Mesh Shorts. Y459</option>
-                  <option value="Y760" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> SOFT SHELL YOUTH JACKET. Y760</option>
-                  <option value="Y7603" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY SOFT SHELL YOUTH JACKET. Y7603</option>
-                  <option value="Y7604" ><b>COAL HARBOUR<sup>&#174;</sup></b> EVERYDAY COLOUR BLOCK SOFT SHELL YOUTH JACKET. Y7604</option>
-                  <option value="Y763" ><b><i>DISCONTINUED</i> COAL HARBOUR&#174;</b> INSULATED SOFT SHELL YOUTH JACKET. Y763</option>
-                  <option value="Y810" ><b><i>DISCONTINUED</i> Coal Harbour&reg; </b> Premium Youth Mock Turtleneck. Y810</option>
-                  <option value="Y822" ><b><i>DISCONTINUED</i> THE AUTHENTIC T-SHIRT COMPANY&reg; </b> - YOUTH BASEBALL TEE. Y822</option>
-
-                </select>
-            </td>
-            <td><input type="image" src="/images/bt_select.png" alt="Select" border="0" value="Submit" /></td>
-          </tr>
-        </table>
-        <p>&nbsp;</p>
-      </form>
+			<!-- required - do not remove -->
+			<div style="display:none" id="portletState">{"Z7_V7H8POO61OTJE0ATG2NV1B0G16":{"windowState":"normal","portletMode":"view"}}</div><div id="layoutContainers" class="wpthemeLayoutContainers wpthemeLayoutContainersHidden">
+				<div class="wpthemeInner">
+					<div class="hiddenWidgetsDiv">
+	<!-- widgets in this container are hidden in the UI by default -->
+	<div class='component-container ibmDndRow hiddenWidgetsContainer id-Z7_V7H8POO61OTJE0ATG2NV1B0GU7' name='ibmHiddenWidgets' ></div><div style="clear:both"></div>
+</div>
+<!-- this layout has one main fluid container -->
+<div class='component-container wpthemeCol wpthemeCol-1 wpthemeLeft pubTheme7Debug ibmDndColumn id-Z7_V7H8POO61OTJE0ATG2NV1B0G10' name='ibmMainContainer' ><div class='component-control id-Z7_V7H8POO61OTJE0ATG2NV1B0G14' ><!-- skin -->
+<div class="ibmPortalControl wpthemeNoSkin a11yRegionTarget" aria-labelledby="">
+    <!-- asa.portlet.id marks the node whose contents are the id of this layout control; set at runtime by script in the decoration instance -->
+    <span style="display:none" class="asa.portlet.id"></span>
+    <!-- Hide the text of the title, but still provide the lm-dynamic-title container for accessing the dynamic title -->
+    <span class="wpthemeAccess">
+    	<span class="lm-dynamic-title asa.portlet.title a11yRegionLabel">S2iErrorMessageHOT</span>
+	</span>
+    <div class="wpthemeOverflowAuto"> <!-- lm:control dynamic spot injects markup of layout control -->
+        
 
 
 
-	<div class="buttons">
-      <form method="POST" action="/smc_shop/shop">
-        <input type="hidden" name="h" value="cart" />
-        <input type="hidden" name="lang" value="en" />
-        <input type="image" src="/images/bt_cartview_xs.png" alt="View cart" border="0" value="Submit" />
-        <!--<input type="submit" value="View cart" />-->
-      </form> 
-      </div>
 
 
-    </p>
-
-
-
-   
-
+ 
 
 
 </div>
-</td></tr>
-</table>
-<!-- Demo Includes -->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link href="/css/logocarousel.css" type="text/css" rel="stylesheet" media="all" />
-<!-- End of Demo Includes -->
+</div> <!-- end skin --></div><div class='component-control id-Z7_V7H8POO61OTJE0ATG2NV1B0G16' ><!-- skin -->
+<div class="ibmPortalControl wpthemeNoSkin a11yRegionTarget" aria-labelledby="">
+    <!-- asa.portlet.id marks the node whose contents are the id of this layout control; set at runtime by script in the decoration instance -->
+    <span style="display:none" class="asa.portlet.id"></span>
+    <!-- Hide the text of the title, but still provide the lm-dynamic-title container for accessing the dynamic title -->
+    <span class="wpthemeAccess">
+    	<span class="lm-dynamic-title asa.portlet.title a11yRegionLabel">S2iProductStatusHOT</span>
+	</span>
+    <div class="wpthemeOverflowAuto"> <!-- lm:control dynamic spot injects markup of layout control -->
+        
 
-<!-- Required Files -->
-<script src="/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="/js/jquery.waitforimages.js" type="text/javascript"></script>
-<script src="/js/jquery.debouncedresize.js" type="text/javascript"></script>
-<!-- End of Required Files -->
 
-<!-- Logo Carousel Files -->
-<link href="/css/at.logocarousel.css" type="text/css" rel="stylesheet" media="all" />
-<script src="/js/jquery.at.logocarousel.js" type="text/javascript"></script>
-<!-- End of Logo carousel Files -->
 
-<script>
-	jQuery(document).ready(function() {
+
+
+ 
+
+
+
+<span id="s2i_build_number" style="display:none" s2i_build_number="Built:2016-09-09 15:17(GMT) — Parent Version:2.0-SNAPSHOT — SVN#:6252"></span>
+<span id="simulationMode"style="display: none;">Simulation
+</span>
+<script>$("#HdrCartLink").css("z-index", 10).append($("#simulationMode").show());
+</script>
+
+
+
+
+	
+
+
+	
+<div class="Instructions">
+	<h4 class="Offscreen-Text">Start of Instructions</h4>
+	<p>Welcome to the High-Occupancy Toll (HOT) Permit draw application. Applications for the October 01, 2016 to December 30, 2016 Permit Period will be accepted from August 01, 2016 until October 31, 2016 23:59 PM.</p>  <p>&#160;</p>  <p><strong>What you need to know before you apply for your permit.</strong></p>  <p>&#160;</p>  <p>It will take approximately 5 to 10 minutes.</p>  <p>&#160;</p>  <p>You will need to provide:</p>  <p>&#160;</p>  <div class='Instructions'> <ul> <li type='disc'>Valid <strong>licence plate number</strong> to enter into the HOT permit draw.</li>  <li type='disc'>Contact details including an email address and phone number.</li> </ul> </div>
+</div>
+
+
+	
+	
 		
-		// It's important that you wait for all images to be loaded
-		// before running the carousel, because the script needs
-		// too calculate the size of the images.
-		jQuery('body').waitForImages(function() {
-			
-			// Use default configuration
-			jQuery('#demo_2').logoCarousel({
-				rows: 1,
-				horizontalDir: 'right',
-				speed: 170,
-				hoverStop: true
+		<script type="text/javascript">
+			$(function() {
+					
+					
+					
+						S2i.UI.Hide("productAvailMsg");
+						$("#ns_Z7_V7H8POO61OTJE0ATG2NV1B0G16_orderNowBtn").click(function() {
+								ns_Z7_V7H8POO61OTJE0ATG2NV1B0G16_orderNow();
+								return false;
+						});
+					
 				
 			});
+			var ontGaClientId = "";
 			
-		});	
+			    function ns_Z7_V7H8POO61OTJE0ATG2NV1B0G16_orderNow() {
+			    	S2i.ShowNavAway = false;
+					window.location.href = "/sodp/portal/s2i/!ut/p/b1/dcpbjoIwFADQtbAAc3sVS_lEgigFW4fKlP4QMjHEBzADhoerd1yAnyc5YCBfoIP2iqHDVqDBNOVwqcrHpW3K-9uGFpmzY1IIikJFAfFUuDxkuCHkRCH_D86nEMo1KNDELtLr2C7n5ourxBbz0d2roMiuZBKYDJKQQcZu0h367sRHn9NvfbtPVU5rXf-edbenvXyyKZ5Td4cYiG2r_3i6jmL_9sB-gXz7E3ixObJotCA9N4XvQW3CofIs6wUkiBND/";
+			    	return false;
+			    };
 			
-	});
-</script>
+		</script>
 
-</div><style type="text/css">
-<!--
-a:link {
-	text-decoration: none;
-	color: #777777;
-}
-a:visited {
-	text-decoration: none;
-	color: #777777;
-}
-a:hover {
-	text-decoration: underline;
-	color: #9F0000;
-}
-a:active {
-	text-decoration: none;
-	color: #777777;
-}
-/* Print Only */
-@media print {
-.noprint {display:none !important;}
-}
--->
-</style>
-	<footer>
-        <div class="container">
-    
-    <div class="clear"></div>
-    
-    <!-- CAROUSEL demo_2 -->
-    <div class="at_logo_carousel" id="demo_2">
-        <ul>
-            <!-- DF logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=34794"><img src="/images/logo_df.png" alt="DryFrame" /></a>
-            </li>
-            <!-- End logo -->
-            
-        	<!-- CH logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=21927"><img src="/images/logo_ch.png" alt="Coal Harbour" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- ATC logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=21926"><img src="/images/logo_atc.png" alt="The Authentic T-Shirt Company" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- EuroSpun -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=36351"><img src="/images/logo_eurosp.png" alt="EuroSpun Collection" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- RealTree logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=38260"><img src="/images/logo_realtree.png" alt="RealTree" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- Callaway logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=38087"><img src="/images/logo_callaway.png" alt="Callaway" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- OGIO logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=20805"><img src="/images/logo_ogi.png" alt="OGIO" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- NE logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=21928"><img src="/images/logo_ne.png" alt="New Era" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- Gildan logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=21914"><img src="/images/logo_gild.png" alt="Gildan" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- EB logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=28208"><img src="/images/logo_eb.png" alt="Eddie Bauer" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- FOL logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=21904"><img src="/images/logo_fol.png" alt="Fruit Of The Loom" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- BC logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=21925"><img src="/images/logo_bc.png" alt="Bella+Canvas" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- RK logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=26194"><img src="/images/logo_rk.png" alt="Red Kap" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- ff logo -->
-            <li>
-                <a href="/cs/CatalogBrowser?id=31024"><img src="/images/logo_ff.png" alt="Flexfit" /></a>
-            </li>
-            <!-- End logo -->
-            
-            <!-- am logo -->
-            <li>
-                <a href="/marketing/airmiles.shtml"><img src="/images/logo_airmiles-scroller.png" alt="AirMiles" /></a>
-            </li>
-            <!-- End logo -->
-            
-        </ul>
-    </div>
-    </div>
-	    <section class="social clearfix">
+		
 			
-	    </section>
-        <foot id="noprint">
-   
-<table style="background-color: #dddddd;" width="100%" border="0" cellspacing="0" cellpadding="5">
-  <tr>
-    <td align="center"><p>&nbsp;</p>
-      <table width="940" border="0" cellpadding="20" cellspacing="0" align="center">
-        <tr>
-          <td width="99" align="left" valign="top"><b><a href="/productspotlight/">Shop Catalogue</a></b><br />
-            <!-- <a href="/cs/CatalogBrowser?id=38089">Coming Soon</a><br /> -->
-            <a href="/cs/CatalogBrowser?id=6155">New Styles</a><br />
-            <a href="/productspotlight/">Product Spotlight</a><br />
-            <a href="/catalogue/order/">Order Catalogues</a><br />
-            <a href="/cs/CatalogBrowser?id=106">Sport Shirts</a><br />
-            <a href="/cs/CatalogBrowser?id=107">Woven Shirts</a><br />
-            <a href="/cs/CatalogBrowser?id=26612">Workwear</a><br />
-            <a href="/cs/CatalogBrowser?id=110">T-Shirts</a><br />
-            <a href="/cs/CatalogBrowser?id=113">Ladies' Only</a><br />
-            <a href="/cs/CatalogBrowser?id=112">Activewear</a><br />
-            <a href="/cs/CatalogBrowser?id=114">Youth Only</a><br />
-            <a href="/cs/CatalogBrowser?id=111">Fleece</a><br />
-            <a href="/cs/CatalogBrowser?id=109">Outerwear</a><br />
-            <a href="/cs/CatalogBrowser?id=8605">Headwear</a><br />
-            <a href="/cs/CatalogBrowser?id=412">Accessories</a><br />
-            <a href="/cs/CatalogBrowser?id=115">Pants/Shorts</a><br />
-            <a href="/cs/CatalogBrowser?id=4159">Disco Zone</a><br /></td>
-          <td width="122" align="left" valign="top"><b>Shop By Brand</b><br />
-            <a href="/cs/CatalogBrowser?id=34794">DryFrame&#174;</a><br />
-            <a href="/cs/CatalogBrowser?id=21927">Coal Harbour<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=21926">ATC&#153;</a><br />
-            <a href="/cs/CatalogBrowser?id=31024">ATC&#153; by Flexfit<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=38608">KOI<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=38260">RealTree<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=36351">EuroSpun</a></li><br />
-            <a href="/cs/CatalogBrowser?id=20805">OGIO<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=21928">New Era<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=38087">Callaway</a><br />
-            <a href="/cs/CatalogBrowser?id=21914">Gildan<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=28208">Eddie Bauer<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=21904">Fruit Of The Loom<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=21925">Bella + Canvas<sup>&#174;</sup></a><br />
-            <a href="/cs/CatalogBrowser?id=26194">Red Kap&#174;</a><br />
-            </td>
-          <td width="124" align="left" valign="top"><b><a href="/marketing/">Marketing Tools</a></b><br />
-            <a href="/marketing/eblast.shtml">Sales & Promotions</a><br />
-            <a href="/marketing/flyerWizard.shtml">Flyer Wizard</a><br />
-            <a href="/marketing/customSite.shtml">Custom Websites</a><br />
-            <a href="/marketing/imagelibrary.shtml">Image Library</a><br />
-            <a href="/marketing/pdf-lookbooks.shtml">PDF/Lookbooks</a><br />
-            <a href="/marketing/priceLists.shtml">Price Lists</a><br />
-            <a href="https://vimeo.com/sanmarcanada/videos">Videos</a><br />
-            <a href="/marketing/samplepacks.shtml">Sample Packs</a><br />
-            <!-- <a href="/marketing/glossary.shtml">Glossary of Terms</a><br /> -->
-            <!-- <a href="/marketing/webdev.shtml">Web Developer</a><br /> -->
-            <a href="/marketing/findadecorator.shtml">Find-A-Decorator</a><br /></td>
-          <td width="152" align="left" valign="top"><b><a href="/aboutus/">About Us</a></b><br />
-            <a href="/aboutus/contactus.shtml">Contact Us</a><br />
-            <a href="/aboutus/locations.shtml">Locations</a><br />
-            <a href="/aboutus/credit.shtml">Become a Customer</a><br />
-            <a href="/aboutus/industryLinks.shtml">Industry Links</a><br />
-            <a href="/aboutus/history.shtml">Company History</a><br />
-            <a href="/aboutus/privacy.shtml">Privacy Policy</a><br />
-            <a href="/aboutus/socialresponsibility.shtml">Social Responsibility</a><br />
-            <a href="/aboutus/termsofuse.shtml">Terms Of Use</a><br />
-            <a href="/aboutus/careers.shtml">Careers</a><br />
-            <a href="/csservice/ra">Return Authorization</a><br />
-            <br />
-            <a href="/fr_index.jsp?lang=fr">Fran&ccedil;ais</a><br />
-            <br />
-            <a href="http://www.imprintableclothes.com/imprintable/">ImprintableClothes.com</a></td>
-          <td width="243" align="left" valign="top" bgcolor="#c4c4c4"><img src="/images/logo_atc_xs.png" alt="" width="200" height="67" /><br /><br />
-            <b>Corporate Headquarters</b><br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (604) 273-9088<br />
-            <img src="/images/icon_email_xs.png" alt="" width="9" height="9" /> <a href="mailto:sanmar@sanmarcanada.com">sanmar@sanmarcanada.com</a><br />
-            <br />
-            <b>Western Customer Service Centre &amp; Showroom</b><br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (604) 273-9088<br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (800) 663-7965<br />
-            <img src="/images/icon_email_xs.png" alt="" width="9" height="9" /> <a href="mailto:saleswest@sanmarcanada.com">sales@sanmarcanada.com</a><br />
-            <br />
-            <b>Eastern Customer Service Centre &amp; Showroom</b><br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (905) 602-6411<br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (800) 668-0899<br />
-            <img src="/images/icon_email_xs.png" alt="" width="9" height="9" /> <a href="mailto:saleseast@sanmarcanada.com">sales@sanmarcanada.com</a><br />
-            <br />
-            <b>Alberta Showroom &amp; Distribution Centre</b><br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (403) 735-9540<br />
-            <br />
-            <b>Winnipeg Showroom</b><br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (204) 515-2088<br />
-            <br />
-            <b>Qu&#233;bec Showroom </b><br />
-            <img src="/images/icon_phone_xs.png" alt="" width="9" height="9" /> (514) 299-4156<br />
-            <img src="/images/icon_email_xs.png" alt="" width="9" height="9" /> <a href="mailto:helenel@sanmarcanada.com">helenel@sanmarcanada.com</a>
-            <p>&nbsp;</p>
-            <a href="/marketing/subscriber_request_form.shtml"><img src="/images/btn_email_subscribe.png"></a>
-				</td>
-	</tr>
-</table>
-</td>
-</tr>
-</table>
-<!--#include virtual="/inc/footer_marketing.html"-->
-<!-- Visitor Chat -->
-<script type="text/javascript">
-    function loadVC() {
-      var vcjs = document.createElement('script'); vcjs.type = 'text/javascript'; 
-      vcjs.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'theauthentictshirtcompany.com/ClientEngage%20System/chat'; 
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vcjs, s);
-    };
-    if (window.addEventListener) window.addEventListener('load', loadVC, false); 
-    else if (window.attachEvent) window.attachEvent('onload', loadVC);
-</script>
-<!-- Visitor Chat -->
-</body>
-</html>
+				
+				
+				
+			
+			
+			
+			
+		
 
-<section class="base">
-<div class="outer_wrapper">
-				&copy; 2015 The Authentic T-Shirt Company/SanMar Canada&nbsp; | <a href="/aboutus/privacy.shtml">&nbsp;Privacy Policy</a>&nbsp; | <a href="/aboutus/termsofuse.shtml">&nbsp;Terms of Use</a>&nbsp; | <a href="/aboutus/contactus.shtml">&nbsp;Contact Us</a>&nbsp; | &nbsp;Follow Us&nbsp;
-                    <a href="http://www.facebook.com/pages/SanMar-Canada-The-Authentic-T-Shirt-Company/202592379760353?fref=ts"><img src="/images/facebook_front.png" alt="" /></a> 
-			        <a href="http://twitter.com/SanMarCanada"><img src="/images/twitter_front.png" alt="" /></a>
-  <a href="https://vimeo.com/sanmarcanada/videos"><img src="/images/media.png" alt="" /></a></div>
-</section>
+		<script type="text/javascript">
+			$("#AppTitle").text("HOT Permit Draw Application");
+		</script>
+		<section class="Navigation"><h4 class="Offscreen-Text">Start of Navigations</h4><div class="Buttons">
+			<div class="Submit"><button class="Primary s2iNavigateAway" type="submit" id="ns_Z7_V7H8POO61OTJE0ATG2NV1B0G16_orderNowBtn" title="Click to proceed to application" >Apply Now
+</button>
 </div>
-	</footer>
+
+				
+		</div></section>
+	
+
+<div id="ns_Z7_V7H8POO61OTJE0ATG2NV1B0G16_TransparentBlocking" style="position:absolute;height: 100%;width: 100%;top: 0;left: 0;z-index: 10000;"></div><script type="text/javascript">$(document).ready(function(){$("#ns_Z7_V7H8POO61OTJE0ATG2NV1B0G16_TransparentBlocking").remove();});</script>
+ </div>
+</div> <!-- end skin --></div><div class='component-control id-Z7_V7H8POO61OTJE0ATG2NV1B0G15' ><!-- skin -->
+<div class="ibmPortalControl wpthemeNoSkin a11yRegionTarget" aria-labelledby="">
+    <!-- asa.portlet.id marks the node whose contents are the id of this layout control; set at runtime by script in the decoration instance -->
+    <span style="display:none" class="asa.portlet.id"></span>
+    <!-- Hide the text of the title, but still provide the lm-dynamic-title container for accessing the dynamic title -->
+    <span class="wpthemeAccess">
+    	<span class="lm-dynamic-title asa.portlet.title a11yRegionLabel">Web Content Viewer (JSR 286)</span>
+	</span>
+    <div class="wpthemeOverflowAuto"> <!-- lm:control dynamic spot injects markup of layout control -->
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		    
+		
+	
+	
+	
+	       		           
     
-<!-- Google Analytics -->    
+		
+	
+	
+		
+			
+			<div id="productInfo">
+	<article id="page" class="InfoPage">
+ 
 
-<script src="http://www.google-analytics.com/urchin.js"   type="text/javascript">
-</script>
-<script   type="text/javascript">
-function submitMailer(){
-	$.post("/mailer/submitform.php", { name: $("#emailaddress").val() });
-	setTimeout(function(){$("#mailerform").html("Thank you for subscribing!")}, 500);
-}
-_uacct =   "UA-2384600-1";
-urchinTracker();
-</script>
+	<section id='hot_draw_list_prodinfo_001' class='Section Close' data-open='Yes'>
 
-<!-- END Google Analytics -->
+    <h4 class="Title" onclick=""><a onclick="return false;" href='#hot_draw_list_prodinfo_001'>Your Privacy Matters</a></h4>
+    <div class="Detail"><p>Your privacy is important to us. Personal information provided by you is collected for the administration of the HOT Lanes Pilot Project authorized under Ontario Regulation 227/16 (Pilot Project – HOT Lanes) of the Highway Traffic Act, R.S.O. 1990, c. H.8. For information about the collection of information, contact the Manager of the HOT Lanes Pilot Office, Suite 1802, 393 University Avenue, Toronto, Ontario, M5G 1E6, 1-888-622-7006 (TTY: 1-800-268-7095).</p>
 
-<!-- Act-On -->
+<p><a href="https://www.ontario.ca/page/privacy-statement" title="Select this link to read about the Collection of Personal Information. This link will open in a new window." target="_blank" >Read more about the collection of personal information&#160;</a></p></div>
 
-<script type="text/javascript">
-  /* <![CDATA[ */
-  document.write (
-    '<img src="http://promos.sanmarcanada.com/acton/bn/5900/visitor.gif?ts='+
-    new Date().getTime()+
-    '&ref='+escape(document.referrer) + '">'
-  );
-  var aoAccountId = '5900';
-  var aoCookieMode = 'STANDARD';
-  var aoCookieDomain = 'sanmarcanada.com';
-  var aoServerContext = 'http://promos.sanmarcanada.com/acton';
-  /* ]]> */
-</script>
+</section><section id='hot_draw_list_prodinfo_002' class='Section Close' data-open='Yes'>
 
-<!-- END Act-On -->
+    <h4 class="Title" onclick=""><a onclick="return false;" href='#hot_draw_list_prodinfo_002'>Browser Requirements</a></h4>
+    <div class="Detail"><p>This application is compatible with a variety of browsers for desktop computers and mobile devices, including:</p>
+
+<ul>
+<li>Google Chrome (23.0 and above)</li>
+
+<li>Mozilla Firefox (17.0 and above)</li>
+
+<li>Safari (5.1 and above)</li>
+
+<li>Internet Explorer (8.0 and above)</li>
+</ul>
+
+<p>For the best browsing experience, <a href="http://www.ontario.ca/faq/what-browsers-work-best-online-services?WT.ac=BrowserReq&WT.govon_mod_loc=LPSRStartPage" title="Select this link to read ServiceOntario&#39;s recommended browsers. This link will open in a new browser window." target="_blank" >read more about ServiceOntario's recommended browsers when using our services</a>.</p></div>
+
+</section><section id='hot_draw_list_prodinfo_003' class='Section Close' data-open='Yes'>
+
+    <h4 class="Title" onclick=""><a onclick="return false;" href='#hot_draw_list_prodinfo_003'>Contact Us</a></h4>
+    <div class="Detail"><p>If you have any questions about the pilot or have any issues during the application process, please contact 1-888-622-7006 (TTY: 1-800-268-7095) or email <a title="Select this link to send an email to the HOT Pilot Office. This link will open in a new window. " target="_blank" href="mailto:hotpilot@ontario.ca">hotpilot@ontario.ca</a></p></div>
+
+</section>
+	</article>
+</div>
+		
+		
+	
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+       
+       <span class="asa.wcm.content_item.path" style="display:none">s2i_english_hot/public/prodinfo/hot_draw/hot_draw_list_prodinfo</span>
+
+       
+       <span class="asa.wcm.content_item.title" style="display:none">HOT Draw_List - Product Info</span>
+
+</div>
+</div> <!-- end skin --></div><div class='component-control id-Z7_V7H8POO61OTJE0ATG2NV1B0G17' ><!-- skin -->
+<div class="ibmPortalControl wpthemeNoSkin a11yRegionTarget" aria-labelledby="">
+    <!-- asa.portlet.id marks the node whose contents are the id of this layout control; set at runtime by script in the decoration instance -->
+    <span style="display:none" class="asa.portlet.id"></span>
+    <!-- Hide the text of the title, but still provide the lm-dynamic-title container for accessing the dynamic title -->
+    <span class="wpthemeAccess">
+    	<span class="lm-dynamic-title asa.portlet.title a11yRegionLabel">Web Content Viewer (JSR 286)</span>
+	</span>
+    <div class="wpthemeOverflowAuto"> <!-- lm:control dynamic spot injects markup of layout control -->
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		    
+		
+	
+	
+	
+	       		           
+    
+		
+	
+	
+		
+			
+			<p class="Text" role="note">This service is tested daily with McAfee SECURE™ to ensure the security of the transaction and information.</p>
+
+		
+		
+	
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+       
+       <span class="asa.wcm.content_item.path" style="display:none">s2i_english_hot/public/general/hot_draw/messages/mcafee</span>
+
+       
+       <span class="asa.wcm.content_item.title" style="display:none">McAfee Secure message</span>
+
+</div>
+</div> <!-- end skin --></div></div>
+<div class="wpthemeClear"></div>
+				</div>
+			</div>
+		</div>
+		<!-- end main content -->
+
+		<!-- start footer -->
+		
+	
+<footer id="footer" class="Footer" role="contentinfo" tabindex="0">
+	<h2 class="Offscreen-Text">Start of ServiceOntario public portal footer.</h2>
+	<div class="InnerWidth">
+		<nav class="Offscreen-Text" role="navigation">	
+			<ul>
+				<li>
+					<a id="os_skipToTop" href="#header" class="">Skip to top of page</a>
+				</li>
+			</ul>
+		</nav>
+	
+		<nav class="Menu" role="navigation">
+			<ul>
+				<li>
+	<a
+		href="http://www.ontario.ca/government/privacy-statement"
+		title="Select this link to read the privacy statement (opens in a new window)"
+		target="_blank">Privacy</a>
+</li>
+<li>
+	<a
+		href="http://www.ontario.ca/page/accessibility"
+		title="Select this link to read about accessibility (opens in a new window)"
+		target="_blank">Accessibility</a>
+</li>
+<li>
+	<a
+		href="https://www.ontario.ca/contact-us"
+		title="Select this link to obtain contact information (opens in a new window)"
+		target="_blank">Contact us</a>
+</li>
+<li>
+	<a id="footer.link.faq"
+		href="https://www.ontario.ca/government/frequently-asked-questions-general?type=faq"
+		title="Select this link to view Frequently Asked Questions (opens in a new window)"
+		target="_blank">FAQ</a>
+</li>
+<li>
+	<a
+		href="http://www.ontario.ca/government/terms-use"
+		title="Select this link to read about Ontario.ca's terms of use. This link will open in a new browser window"
+		target="_blank">Terms of use</a>
+</li>
+
+<li class="queens-printer">
+	<a href="https://www.ontario.ca/government/copyright-information-c-queens-printer-ontario"
+	   title="Select this link to read about copyright information: Queen's Printer for Ontario (opens in a new window)"
+	   target="_blank">&copy; Queen's Printer for Ontario 2015</a>
+</li>
+
+<!-- No link to Desktop site for non-mobile users. -->
+			</ul>
+		</nav>
+	</div>
+</footer>
+<span id="Ont__Swoop" class="Swoop" aria-hidden="true"></span>
+
+<span class="Hide" aria-hidden="true">Last Modified: August 12, 2015</span>
+<!-- end footer -->
+
+	</div><!-- end wpthemeFrame -->
+
+	<!-- active site analytics additions -->
+	
+
+<div style="display:none;">
+  <span class="asa.visitor"></span>
+
+  <span class="asa.url"></span>
+
+  <span class="asa.page.title">HOT Permit Draw Application</span>
+
+  <span class="asa.page.id">Z6_V7H8POO61OTJE0ATG2NV1B00I4</span>
+
+  <span class="asa.page.breadcrumb">
+    /Home
+    /myServiceOntario
+    /HOT Permit Draw Application
+    /HOT Permit Draw Application</span>
+</div>
+
+<!-- This is responsible for bootstrapping the configuration for the javascript framework.
+        This is located here instead of the head section to improve client performance. -->
+    <script type="text/javascript" src="/sodp/contenthandler/s2i/!ut/p/digest!oElIFh-nr7FDczlkyj9r4A/mashup/ra:collection?themeID=ZJ_V7H8POO618AT20AODBCS9L30G4&amp;locale=en&amp;entry=wp_portal__0.0%3Aconfig_config_static&amp;mime-type=text%2Fplain"></script><script type="text/javascript">i$.merge({"ibmCfg":{"themeConfig":{"themeUniqueName":"ca.on.gov.s2i.s2iMobileTheme","themeRootURI":"/sodp/contenthandler/s2i/!ut/p/digest!yOgaupeEHLGevHIYk7Or1Q/war/s2iMobileThemeStatic/themes/s2iMobile","themeWebAppBaseURI":"/s2iMobileTheme/themes/html/s2iMobile","themeWebDAVBaseURI":"war:s2iMobileThemeStatic/themes/s2iMobile/","commonResourcesRootURI":"/sodp/contenthandler/s2i/!ut/p/digest!Fva2HYsBlABIrLgnl0YVrA/dav/fs-type1/common-resources","isRTL":false,"isPageRenderModeCSA":false,"portletOverridePageTitle":"HOT Permit Draw Application","currentContentNodeOID":"Z6_V7H8POO61OTJE0ATG2NV1B00I4"},"portalConfig":{"locale":"en","portalURI":"/sodp/portal","contentHandlerURI":"/sodp/contenthandler/s2i/!ut/p/digest!JwZVbtCzGnukkC2m-sFEDQ/","themeRootURI":"/s2iMobileTheme/themes/html/s2iMobile","parentPageID":"Z6_V7H8POO61OTJE0ATG2NV1B00S5","currentPageOID":"Z6_V7H8POO61OTJE0ATG2NV1B00I4","bootstrapState":"&lt;?xml version=&#034;1.0&#034; encoding=&#034;UTF-8&#034;?&gt;&lt;root xmlns=&#034;http://www.ibm.com/xmlns/prod/websphere/portal/v6.1/portal-state&#034;&gt;&lt;state type=&#034;navigational&#034;&gt;&lt;selection selection-node=&#034;Z6_V7H8POO61OTJE0ATG2NV1B00I4&#034;&gt;&lt;parameters/&gt;&lt;mapping src=&#034;Z6_000000000000000000000000A0&#034; dst=&#034;Z6_V7H8POO61OTJE0ATG2NV1B00I4&#034;/&gt;&lt;/selection&gt;&lt;expansions&gt;&lt;node id=&#034;Z6_V7H8POO61GQU00ADCNDF893AO1&#034;/&gt;&lt;node id=&#034;Z6_V7H8POO61G6E80AL3JGSDB3884&#034;/&gt;&lt;node id=&#034;Z6_V7H8POO61876B0A8BFA69420S7&#034;/&gt;&lt;node id=&#034;Z6_000000000000000000000000A0&#034;/&gt;&lt;/expansions&gt;&lt;portlet id=&#034;Z7_V7H8POO61OTJE0ATG2NV1B0G16&#034;&gt;&lt;parameters&gt;&lt;param name=&#034;simulator&#034;&gt;&lt;value&gt;true&lt;/value&gt;&lt;/param&gt;&lt;param name=&#034;lang&#034;&gt;&lt;value&gt;en&lt;/value&gt;&lt;/param&gt;&lt;/parameters&gt;&lt;/portlet&gt;&lt;locale&gt;en_CA&lt;/locale&gt;&lt;theme-template&gt;Home&lt;/theme-template&gt;&lt;/state&gt;&lt;/root&gt;","isUserLoggedIn":false,"currentUser":"anonymous portal user","currentUserOID":"","aggregatedStyle":null,"wcmPageMetadata":{"contentRoot":null,"sharingScope":null}},"userName":""}});ibmCfg.portalConfig.bootstrapState=(ibmCfg.portalConfig.bootstrapState||"").replace(/&lt;/gm, '<').replace(/&gt;/gm, '>').replace(/&amp;/gm, '&').replace(/&#039;/gm, "'").replace(/&#034;/gm, '"');</script><script type="text/javascript" src="/sodp/contenthandler/s2i/!ut/p/digest!yOgaupeEHLGevHIYk7Or1Q/mashup/ra:collection?themeID=ZJ_V7H8POO618AT20AODBCS9L30G4&amp;locale=en&amp;entry=s2iMobile_portal_theme_config__0.0%3Aconfig_js&amp;mime-type=text%2Fplain"></script><div class="S2i Hide" id="s2iTxnMsg"></div>
+    
+	<section tabindex="-1" class="Section Lightbox" style="z-index:500;" aria-hidden="true" aria-describedby="s2i-timeout" aria-labelledby="s2i-timeout-title" id="s2i-timeout-lbox" role="alertdialog">
+	  <div class="Inside animated">
+	    <h3 class="Title" tabindex="-1" id="s2i-timeout-title">Warning - Session Expiry</h3>
+	    <div id="s2i-timeout" tabindex="-1" class="Detail">
+			<div class="Instruction"><span id="s2i_timeout_msg"></span></div>
+			<div class="Navigation">
+				<div class="Submit">
+					<button onclick="S2i.Lightbox.Close(this);" class="Secondary" id="s2i_sess_timeout_btn_ok" >OK</button>
+				</div>
+			</div>
+	    </div>
+	    <button onclick="S2i.Lightbox.Close(this);" class="Close" id="s2i_sess_timeout_btn_close">Close Session Expiry Dialog</button>
+	  </div>
+	</section>
+	
+	<!-- NavNewWindow -->
+	<section tabindex="-1" class="Section Navigation Lightbox" style="z-index:500;" aria-hidden="true" aria-describedby="s2i-newwin" aria-labelledby="s2i-newwin-title" id="s2i-newwin-lbox" role="alertdialog">
+	  <div class="Inside animated">
+	    <h3 class="Title" tabindex="-1" id="s2i-newwin-title">Please confirm</h3>
+	    <div id="s2i-newwin" tabindex="-1" class="Detail">
+			<div class="Instruction">The link you have selected will open in a new browser window and will navigate you away from your current page. Choose "Yes" to continue or "No" to stay on the current page.</div>
+			<div class="Buttons">
+				<div class="Cancel">
+					<button onclick="S2i.NavNewWin.cancelNo( $('#s2i-newwin-lbox') );" class="Secondary" id="s2i_newwin_btn_No">No</button>
+				</div>
+				<div class="Submit">
+					<button onclick="S2i.NavNewWin.cancelYes( $('#s2i-newwin-lbox'), S2i.NavNewWin.newUrl );" class="Warning" id="s2i_newwin_btn_yes">Yes</button>
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</section>	
+    
+	<script type="text/javascript">
+		$.ajaxSetup ({  
+	        cache: false  
+	    });
+
+		$(document).ready(function () {
+			// append lang param to poc links
+			$('[href *= "uri=pagelink:"], [href *= "uri=s2i:"], [href *= "/onekey?"]').not('[href = "lang="]').each(function() {
+				var langUrl = $(this).attr('href') + '&lang=' + userLang;
+				$(this).attr('href', langUrl);
+			});
+			
+			// prep timeout
+			var productGroup = $("meta[name='sodp.productGroup']").attr("content").toLowerCase();
+			if (!productGroup) {
+				productGroup = "dvs";
+			}
+			//S2i.Timeout.sessUrl += "&productGroup=" + productGroup;
+			
+			S2i.Timeout.refId = $("#s2iref").attr("transactionId");
+			var $focused = $(':focus'); // for a11y
+			var itm = $("#s2iref").attr("items");
+			S2i.Timeout.items = (itm) ? itm : "0";
+			
+			if (S2i.Timeout.dvs && parseInt(S2i.Timeout.items) > 0 && !S2i.Timeout.active) {
+				S2i.Timeout.active = true;
+			}
+
+			if (S2i.Timeout.active && jQuery.type(S2i.Timeout.refId) != "undefined" && S2i.Timeout.refId != "" && S2i.Timeout.refId.length > 0) {
+				S2i.Timeout.dtPageLoad = new Date();
+				$("#s2i_timeout_msg").text(S2i.Timeout.sessMsg);
+				S2i.Timeout.messageTimer = (parseInt(S2i.Timeout.sessTime)-6)*60*1000, // accommodates ONe-key timeout
+				S2i.Timeout.sessionTimer = ((parseInt(S2i.Timeout.sessTime)*60)-15)*1000, // less 15 secs.
+				$("#s2i_sess_timeout_btn_ok").unbind("click");
+		    	$("#s2i_sess_timeout_btn_ok").click(
+		    		function(){
+		    			S2i.Timeout.sessTimeRestart();
+		    			S2i.Lightbox.Close(this);
+		    		}
+		    	);
+				$("#s2i_sess_timeout_btn_close").unbind("click");
+		    	$("#s2i_sess_timeout_btn_close").click(
+		    		function(){
+		    			S2i.Timeout.sessTimeRestart();
+		    			S2i.Lightbox.Close(this);
+		    		}
+		    	);
+				// for troubleshooting
+				$("#s2iTxnMsg").text(S2i.Timeout.refId + " " + (S2i.Timeout.dtPageLoad).toLocaleTimeString());
+				// for a11y: put focus back where it was
+				$focused.focus();
+				
+				S2i.Timeout.msgTimerId = setTimeout(S2i.Timeout.sessionWarn, S2i.Timeout.messageTimer);
+				S2i.Timeout.sessTimerId = setTimeout(S2i.Timeout.sessionEnd, S2i.Timeout.sessionTimer);
+			}
+			
+			// NavNewWindow - mobile only
+			if (S2i.DeviceClass != "desktop") {
+				$("a[target='_blank']").unbind("click");
+				$("a[target='_blank']").click(
+					function(){
+						S2i.NavNewWin.newUrl = $(this).attr('href');
+						S2i.Lightbox.Show('#s2i-newwin-lbox');
+						return false;
+					}
+				);
+				
+				$("#s2i-newwin-lbox").css("z-index", 10000);
+			}
+			
+		});
+	</script>
+
+	<!-- Script libraries for Google Analytics - updated for S2I - START --> 
+	<script src="/s2iMobileThemeStatic/themes/s2iMobile/js/ga/metrics.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 
+	<script src="/s2iMobileThemeStatic/themes/s2iMobile/js/ga/so-s2i.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/s2iMobileThemeStatic/themes/s2iMobile/js/ga/pageview_tracker.js" type="text/javascript" charset="utf-8"></script>
+	 -->
+	<!-- Script libraries for Google Analytics - END -->
+	
 </body>
-</html>
-
+</html>

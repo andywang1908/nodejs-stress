@@ -53,10 +53,10 @@ var singleDraw = function(task, summary, tasks) {
 
   var Multi = require('../../util.js').Multi
   var util = new Multi()
-  /*
+  /**/
   util.logFile = function(fileName, content) {
     //fs.writeFile(fileName, content)
-  }*/
+  }
 
   var formPlateNumber = {
     step: '1',
@@ -90,14 +90,14 @@ var singleDraw = function(task, summary, tasks) {
   var sessionId = ''
   console.log('sessionId init is empty!')
 
-  return util.crabSession(constant.urlApply, '')
+  return util.crab(constant.urlApply)
     .spread(function(response, body) {
       util.logConsole('debug', "StepApply finish")
       util.logFile("log/StepApply.html", body)
       //console.log('constant.urlPlateNumber:'+constant.urlPlateNumber)
       sessionId = checkCookie(response)
 
-      return util.crabSession(constant.urlPlateNumber, sessionId)
+      return util.crab(constant.urlPlateNumber)
     })
     .spread(function(response, body) {
       util.logConsole('debug', "StepPlateNumber finish");
@@ -108,7 +108,7 @@ var singleDraw = function(task, summary, tasks) {
       var $ = cheerio.load(body);
       var action = calFullUrl($('#hot01_drawForm').attr('action'))
         //console.log( action )
-      return util.brabSession(action, formPlateNumber, sessionId)
+      return util.brab(action, formPlateNumber)
     })
     .spread(function(response, body) {
       util.logConsole('debug', "StepGhost finish");
@@ -117,7 +117,7 @@ var singleDraw = function(task, summary, tasks) {
 
       var urlContact = response.headers.location
         //util.logConsole('debug', urlContact)
-      return util.crabSession(urlContact, sessionId)
+      return util.crab(urlContact)
     })
     .spread(function(response, body) {
       util.logConsole('debug', "StepContact finish");
@@ -127,7 +127,7 @@ var singleDraw = function(task, summary, tasks) {
       var $ = cheerio.load(body);
       var action = calFullUrl($('#hot01_drawForm').attr('action'))
         //console.log( action )
-      return util.brabSession(action, formContact, sessionId)
+      return util.brab(action, formContact)
     })
     .spread(function(response, body) {
       util.logConsole('debug', "StepGhost1 finish")
@@ -135,7 +135,7 @@ var singleDraw = function(task, summary, tasks) {
 
       var urlContact = response.headers.location
         //util.logConsole('debug', urlContact)
-      return util.crabSession(urlContact, sessionId)
+      return util.crab(urlContact)
     })
     .spread(function(response, body) {
       util.logConsole('debug', "StepSurvey finish")
@@ -155,7 +155,7 @@ var singleDraw = function(task, summary, tasks) {
 
       var surveyResponseId = JSON.parse(body).responseId //3299
       util.logConsole('debug', "surveyResponseId:" + surveyResponseId)
-      return util.brabSession(urlPortalSurvey, { SURVEY_RESULT_ID: surveyResponseId }, sessionId)
+      return util.brab(urlPortalSurvey, { SURVEY_RESULT_ID: surveyResponseId })
     })
     .spread(function(response, body) {
       util.logConsole('debug', "StepGhost3 finish");
@@ -163,7 +163,7 @@ var singleDraw = function(task, summary, tasks) {
 
       var urlConfirm = response.headers.location
       util.logConsole('debug', 'urlConfirm:'+urlConfirm)
-      return util.crabSession(urlConfirm, sessionId)
+      return util.crab(urlConfirm)
     })
     .spread(function(response, body) {
       util.logConsole('debug', "StepConfirm finish");

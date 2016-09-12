@@ -6,7 +6,6 @@ var Promise = require("bluebird")
 
 /*
 var oracledb = require('oracledb');
-
 oracledb.getConnection(
   {
     user          : "s2i_hot",
@@ -24,7 +23,6 @@ oracledb.getConnection(
         console.log(result.rows);
       });
   });
-
 return*/
 
 var genHtml = function(summary, taskFolder) {
@@ -62,8 +60,8 @@ var main = function(taskFolder) {
   mapTask.mapTask(tasks)
     .then(function() {
       Util.logConsole('info', 'tasks are created!')
-      //tasks = tasks.slice(0, 1);
-      //Util.logConsole('debug', tasks)
+      tasks = tasks.slice(0, 1);
+      Util.logConsole('debug', tasks)
       //return
 
       return Promise.map(tasks, function(task) {
@@ -90,4 +88,5 @@ var main = function(taskFolder) {
 }
 
 //main('./task/sanmarcanada/')
-main('./task/hotDraw/')
+//main('./task/hotDraw/')
+main('./task/canadiantire/')

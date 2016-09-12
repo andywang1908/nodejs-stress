@@ -35,7 +35,7 @@ var genHtml = function(summary, taskFolder) {
       var dealsLength = deals.length
 
       for (var i = 0; i < dealsLength; i++) {
-        if (deals[i]['ratio'] <= 0.7) { // && key.indexOf('category')>-1
+        if (deals[i]['ratio'] <= 0.99) { // && key.indexOf('category')>-1
           html += '<li>' + deals[i]['brand'] + ':' + deals[i]['p1'] + ':cheap to:' + deals[i]['p2'] + ':' + deals[i]['ratio'] + ':' + '<a href="' + deals[i]['href'] + '" target="_blank">' + deals[i]['desc'] + '</a><imga src="' + deals[i]['icon'] + '"/></li>\n'
           htmlCount++
         }
@@ -49,6 +49,7 @@ var genHtml = function(summary, taskFolder) {
 var main = function(taskFolder) {
   var tasks = [] //new Array(1)
   var summary = require(taskFolder+'kpi.json')
+  var singleDraw = require(taskFolder + 'singleDraw.js')
   //danger
   //var summary = {} //restart
   Util.logConsole('info', 'Finished tasks number:' + Object.keys(summary).length)
@@ -60,19 +61,19 @@ var main = function(taskFolder) {
   mapTask.mapTask(tasks)
     .then(function() {
       Util.logConsole('info', 'tasks are created!')
-      tasks = tasks.slice(0, 1);
-      Util.logConsole('debug', tasks)
+      //tasks = tasks.slice(0, 1);
+      //Util.logConsole('debug', tasks)
       //return
 
       return Promise.map(tasks, function(task) {
 
+        /* useless , plus do not use property in singolor mood
         var Multi = require(taskFolder + 'singleDraw.js').Multi
         var singleDraw = new Multi()
-        singleDraw.task = task
-        //singleDraw = require(taskFolder + 'singleDraw.js')
+        singleDraw.task = task */
 
         return singleDraw.singleDraw(task, summary, tasks)
-      }, { concurrency: 2 }).then(function() {
+      }, { concurrency: 1 }).then(function() {
         Util.logFile(taskFolder + 'kpi.json', JSON.stringify(summary))
       })
     })

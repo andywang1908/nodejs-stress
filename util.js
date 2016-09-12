@@ -34,7 +34,7 @@ var request = Promise.promisifyAll(require("request").defaults({ jar: true }), {
 var crab = function(urlNew) {
   var options = {
     //url: urlNew
-    //proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
+    proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
     timeout: 80000,
     headers: {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16"
@@ -50,7 +50,7 @@ exports.crab = crab
 var brab = function(urlNew, formParams) {
   var options = {
     //url: urlNew
-    //proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
+    proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
     timeout: 50000,
     headers: {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16"
@@ -67,9 +67,8 @@ exports.brab = brab
 var arab = function(urlNew, requestDataString) {
   var options = {
     //url: urlNew
-    a: 'a'
-      //,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
-      ,
+    a: 'a',
+    proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
     timeout: 50000,
     headers: {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16",
@@ -83,30 +82,39 @@ var arab = function(urlNew, requestDataString) {
 }
 exports.arab = arab
 
+var webdriver = require('selenium-webdriver')
+var By = webdriver.By
+var until = webdriver.until
+var driver = null
+var initWebdriver = function() {
+  if ( driver == null ) {
+    driver = new webdriver.Builder().forBrowser('firefox').build()
+    //driver.get('about:blank')
+  }
 
-  var webdriver = require('selenium-webdriver')
-  var By = webdriver.By
-  var until = webdriver.until
+  return driver
+}
+exports.initWebdriver = initWebdriver
+//http://seleniumhq.github.io/selenium/docs/api/javascript/
+//http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/
 
-  var driver = null
-var irab = function(urlNew) {
-  if ( driver==null ) {
+/*
+var By = webdriver.By
+var until = webdriver.until
+var driver = null
+var irab = function() {
+  if (driver == null) {
     var builder = new webdriver.Builder().forBrowser('firefox')
     //builder = Promise.promisifyAll(builder, {multiArgs: true})
+    var builderBuild = Promise.promisify(builder.build());
 
-  driver = new webdriver.Builder()
-    .forBrowser('firefox')
-    .build();
+    driver = builderBuild();
 
-  console.log(111)
+    driver.get('about:blank')
+      //return
 
-  driver.get('about:blank')
-  //return
-
-  console.log(222)
-
-  driver.get('http://www.canadiantire.ca/en/kids-zone/baby-toddler/car-seats-accessories.html')
-  driver.get('http://www.google.ca')
+    driver.get('http://www.canadiantire.ca/en/kids-zone/baby-toddler/car-seats-accessories.html')
+    driver.get('http://www.google.ca')
 
     return Promise.resolve()
   } else {
@@ -119,9 +127,9 @@ var srab = function(urlNew) {
 
   return Promise.resolve()
 }
-exports.srab = srab
+exports.srab = srab*/
 
-exports.Multi = function(){
+exports.Multi = function() {
   //webClient
   //new (require('./user'))();
   //var webClient = JSON.parse(JSON.stringify(request))
@@ -135,9 +143,8 @@ exports.Multi = function(){
   this.arab = function(urlNew, requestDataString) {
     var options = {
       //url: urlNew
-      a: 'a'
-        //,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
-        ,
+      a: 'a',
+      proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
       timeout: 50000,
       headers: {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16",
@@ -152,9 +159,8 @@ exports.Multi = function(){
   this.brab = function(urlNew, formParams) {
     var options = {
       //url: urlNew
-      a: 'a'
-        //,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
-        ,
+      a: 'a',
+      proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
       timeout: 50000,
       headers: {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16"
@@ -169,9 +175,8 @@ exports.Multi = function(){
   this.crab = function(urlNew) {
     var options = {
       //url: urlNew
-      a: 'a'
-        //,proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128'
-        ,
+      a: 'a',
+      proxy:'http://ebc%5Cwangan1:Ontario3%24@204.40.194.129:3128',
       timeout: 80000,
       headers: {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) \ Chrome/24.0.1304.0 Safari/537.16"

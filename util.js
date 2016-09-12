@@ -88,8 +88,8 @@ exports.arab = arab
 exports.Multi = function(){
   //webClient
   //new (require('./user'))();
-  var webClient = JSON.parse(JSON.stringify(request))
-  //Promise.promisifyAll(require("request").defaults({ jar: true }), {multiArgs: true})
+  //var webClient = JSON.parse(JSON.stringify(request))
+  var webClient = request
 
   this.arab = function(urlNew, requestDataString) {
   var options = {

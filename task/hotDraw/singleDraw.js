@@ -41,7 +41,7 @@ var singleDraw = function(task, summary, tasks) {
     plateSearchString2: constant.plateNumber,
     termOfUse: 'true',
     simulator: 'true'
-  };
+  }
   var formContact = {
     step: '2',
     plateSearchString1: constant.plateNumber,

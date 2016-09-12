@@ -62,8 +62,9 @@ var main = function(taskFolder) {
   mapTask.mapTask(tasks)
     .then(function() {
       Util.logConsole('info', 'tasks are created!')
-      //tasks = tasks.slice(0, 2);
+      tasks = tasks.slice(0, 1);
       //Util.logConsole('debug', tasks)
+      //return
 
       return Promise.map(tasks, function(task) {
 
@@ -88,4 +89,4 @@ var main = function(taskFolder) {
     })
 }
 
-main('./task/hotDraw/')
+main('./task/sanmarcanada/')

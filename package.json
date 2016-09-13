@@ -21,6 +21,7 @@
     "cheerio": "^0.22.0",
     "fs": "0.0.1-security",
     "request": "^2.74.0",
+    "selenium-webdriver": "^3.0.0-beta-2",
     "winston": "^2.2.0"
   }
 }

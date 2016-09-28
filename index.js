@@ -35,7 +35,7 @@ var genHtml = function(summary, taskFolder) {
       var dealsLength = deals.length
 
       for (var i = 0; i < dealsLength; i++) {
-        if (deals[i]['ratio'] <= 0.99) { // && key.indexOf('category')>-1
+        if (deals[i]['ratio'] <= 0.49) { // && key.indexOf('category')>-1
           html += '<li>' + deals[i]['brand'] + ':' + deals[i]['p1'] + ':cheap to:' + deals[i]['p2'] + ':' + deals[i]['ratio'] + ':' + '<a href="' + deals[i]['href'] + '" target="_blank">' + deals[i]['desc'] + '</a><imga src="' + deals[i]['icon'] + '"/></li>\n'
           htmlCount++
         }
@@ -73,7 +73,7 @@ var main = function(taskFolder) {
         singleDraw.task = task */
 
         return singleDraw.singleDraw(task, summary, tasks)
-      }, { concurrency: 1 }).then(function() {
+      }, { concurrency: 5 }).then(function() {
         Util.logFile(taskFolder + 'kpi.json', JSON.stringify(summary))
       })
     })
@@ -90,4 +90,5 @@ var main = function(taskFolder) {
 
 //main('./task/sanmarcanada/')
 //main('./task/hotDraw/')
-main('./task/canadiantire/')
+//main('./task/canadiantire/')
+main('./task/sportinglife/')
